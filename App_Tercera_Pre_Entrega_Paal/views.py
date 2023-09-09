@@ -1,18 +1,19 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from .models import *
 
 # Create your views here.
 def novedad(req):
-    pass
+    return HttpResponse(f"Vista de Novedades")
 
 
 def libro(req):
-    pass
+    return HttpResponse(f"Vista de Libros")
 
 
 def merchandising(req):
-    pass
+    return HttpResponse(f"Vista de Merchandising")
 
 
-def usuario(req):
-    pass
+def consulta(req):
+    return HttpResponse(f"Vista de Consulta")
