@@ -41,9 +41,9 @@ class Consulta(models.Model):
     def __str__(self):
         return f"{self.consulta}"
 
-class Consultas_Usuarios(models.Model):
+class Consultas_Clientes(models.Model):
 
-    consulta_usuario = models.ForeignKey(Consulta, on_delete=models.CASCADE)
+    consulta_cliente = models.ForeignKey(Consulta, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.consulta_usuario.nombre}"
+        return f"{self.consulta_cliente.nombre}"
