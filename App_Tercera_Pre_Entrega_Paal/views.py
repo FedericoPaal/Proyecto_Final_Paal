@@ -3,17 +3,21 @@ from django.http import HttpResponse
 from .models import *
 
 # Create your views here.
+def inicio(req):
+    return render(req, "inicio.html")
+
+
 def novedad(req):
-    return HttpResponse(f"Vista de Novedades")
+    return render(req, "novedad.html")
 
 
 def libro(req):
-    return HttpResponse(f"Vista de Libros")
+    return render(req, "libro.html")
 
 
 def merchandising(req):
-    return HttpResponse(f"Vista de Merchandising")
+    return render(req, "merchandising.html")
 
 
 def consulta(req):
-    return HttpResponse(f"Vista de Consulta")
+    return render(req, "consulta.html")
