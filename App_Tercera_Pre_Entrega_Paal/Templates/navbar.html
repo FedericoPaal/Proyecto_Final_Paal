@@ -1,11 +1,11 @@
  <!-- Navigation-->
-        <nav class="navbar navbar-light bg-light static-top">
-            <div class="container">
-                <a class="navbar-brand" href="/App-Tercera-Pre-Entrega-Paal/"> Inicio</a>
-                <a class="navbar-brand" href="/App-Tercera-Pre-Entrega-Paal/novedad/"> Novedades</a>
-                <a class="navbar-brand" href="/App-Tercera-Pre-Entrega-Paal/libro/"> Libros</a>
-                <a class="navbar-brand" href="/App-Tercera-Pre-Entrega-Paal/merchandising/"> Merchandising</a>
-                <a class="navbar-brand" href="/App-Tercera-Pre-Entrega-Paal/consulta/"> Consultas</a>
-                <a class="btn btn-primary" href="#signup"> Iniciar Sesión </a>
-            </div>
-        </nav>
+<nav class="navbar navbar-light bg-light static-top">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'Inicio' %}"> Inicio</a>
+        <a class="navbar-brand" href="{% url 'Novedades' %}"> Novedades</a>
+        <a class="navbar-brand" href="{% url 'Libros' %}"> Libros</a>
+        <a class="navbar-brand" href="{% url 'Merchandising' %}"> Merchandising</a>
+        <a class="navbar-brand" href="{% url 'Consultas' %}"> Consultas</a>
+        <a class="btn btn-primary" href="#signup"> Iniciar Sesión </a>
+    </div>
+</nav>

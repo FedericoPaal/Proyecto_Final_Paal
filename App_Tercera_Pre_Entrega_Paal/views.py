@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse 
 from .models import *
 
 # Create your views here.
@@ -20,4 +20,4 @@ def merchandising(req):
 
 
 def consulta(req):
-    return render(req, "consulta.html")
+    return render(req, "consulta.html") 
