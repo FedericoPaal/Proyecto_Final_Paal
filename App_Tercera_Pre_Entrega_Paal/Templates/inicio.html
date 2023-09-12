@@ -1,5 +1,10 @@
 {% extends 'padre.html' %}
 
+{% block header_inicio %}
+    <h1 class="mb-5"> Bienvenido a nuestra Revisteria! </h1>
+{% endblock header_inicio %}
+
+
 {% block inicio %}
     
     <h3> ¿Quienes somos? </h3>
@@ -13,7 +18,7 @@
 
     <br>
 
-    <h3> Podes buscar el libro o merchandising que mas te guste aqui: </h3>
+    <h3> Podes buscar el libro o comic que mas te guste aqui: </h3>
     <form action="{% url 'Buscar' %}" method="get">
        
         <p> Producto/s: <input type="text" name="producto">  </p>
@@ -25,13 +30,15 @@
 
     <p> Resultados de la busqueda: </p>
 
-    
+
     {% if productos %}
         <ul>  
             {% for producto in productos %}
                 <li> {{producto}} </li>
             {% endfor %}  
         </ul>
+    {% else %}
+        <h5> No se encontraron resultados de la busqueda </h5>
     {% endif %}
 
 {% endblock inicio %}

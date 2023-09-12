@@ -11,65 +11,65 @@ def inicio(req):
 def novedad(req):
 
     if req.method == "POST":
-        mi_formulario = Novedades_Formulario(req.POST)
+        novedad_formulario = Novedades_Formulario(req.POST)
 
-        if mi_formulario.is_valid():
-            data = mi_formulario.cleaned_data
+        if novedad_formulario.is_valid():
+            data = novedad_formulario.cleaned_data
             _novedad = Novedad(titulo=data["titulo"], autor=data["autor"], precio=data["precio"])
             _novedad.save()
 
             return render(req, "inicio.html")
     else:
-        mi_formulario = Novedades_Formulario()
-        return render(req, "novedad.html", {"mi_formulario": mi_formulario})
+        novedad_formulario = Novedades_Formulario()
+        return render(req, "novedad.html", {"mi_formulario": novedad_formulario})
 
 
 def libro(req):
 
     if req.method == "POST":
-        mi_formulario = Libros_Formulario(req.POST)
+        libro_formulario = Libros_Formulario(req.POST)
 
-        if mi_formulario.is_valid():
-            data = mi_formulario.cleaned_data
-            _novedad = Novedad(titulo=data["titulo"], autor=data["autor"], precio=data["precio"])
-            _novedad.save()
+        if libro_formulario.is_valid():
+            data = libro_formulario.cleaned_data
+            _libro = Libro(titulo=data["titulo"], autor=data["autor"], precio=data["precio"])
+            _libro.save()
             
             return render(req, "inicio.html")
     else:
-        mi_formulario = Libros_Formulario()
-        return render(req, "libro.html", {"mi_formulario": mi_formulario})
+        libro_formulario = Libros_Formulario()
+        return render(req, "libro.html", {"mi_formulario": libro_formulario})
 
 
 def merchandising(req):
 
     if req.method == "POST":
-        mi_formulario = Merchandising_Formulario(req.POST)
+        merchandising_formulario = Merchandising_Formulario(req.POST)
 
-        if mi_formulario.is_valid():
-            data = mi_formulario.cleaned_data
-            _novedad = Novedad(nombre=data["nombre"], precio=data["precio"])
-            _novedad.save()
+        if merchandising_formulario.is_valid():
+            data = merchandising_formulario.cleaned_data
+            _merchandising = Merchandising(nombre=data["nombre"], precio=data["precio"])
+            _merchandising.save()
             
             return render(req, "inicio.html")
     else:
-        mi_formulario = Merchandising_Formulario()
-        return render(req, "merchandising.html", {"mi_formulario": mi_formulario})
+        merchandising_formulario = Merchandising_Formulario()
+        return render(req, "merchandising.html", {"mi_formulario": merchandising_formulario})
     
 
 def consulta(req):
 
     if req.method == "POST":
-        mi_formulario = Consultas_Formulario(req.POST)
+        consulta_formulario = Consultas_Formulario(req.POST)
 
-        if mi_formulario.is_valid():
-            data = mi_formulario.cleaned_data
-            _novedad = Novedad(nombre=data["nombre"], email=data["email"], precio=data["precio"])
-            _novedad.save()
+        if consulta_formulario.is_valid():
+            data = consulta_formulario.cleaned_data
+            _consulta = Consulta(nombre=data["nombre"], email=data["email"], precio=data["precio"])
+            _consulta.save()
             
             return render(req, "inicio.html")
     else:
-        mi_formulario = Consultas_Formulario()
-        return render(req, "consulta.html", {"mi_formulario": mi_formulario})
+        consulta_formulario = Consultas_Formulario()
+        return render(req, "consulta.html", {"mi_formulario": consulta_formulario})
     
 
 def busqueda_objetos(req):
@@ -80,9 +80,7 @@ def buscar(req: HttpRequest):
     if req.GET["producto"]:
         producto = req.GET["producto"]
         
-        objetos = Novedad.objects.filter(titulo__icontains=producto), Libro.objects.filter(titulo__icontains=producto), Merchandising.objects.filter(nombre__icontains=producto)
-
-        productos = objetos
+        productos = Libro.objects.filter(titulo__icontains=producto)
 
         return render(req, "inicio.html", {"productos": productos})
     else:

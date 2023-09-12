@@ -25,7 +25,20 @@
                     <div class="col-xl-6">
                         <div class="text-center text-white">
                             <!-- Page heading-->
-                            <h1 class="mb-5"> Bienvenido a nuestra pagina! </h1>
+                            {% block header_inicio %}
+                            {% endblock header_inicio %}
+
+                            {% block header_novedad %}
+                            {% endblock header_novedad %}
+
+                            {% block header_libro %}
+                            {% endblock header_libro %}
+
+                            {% block header_merchandising %}
+                            {% endblock header_merchandising %}
+
+                            {% block header_consultas %}
+                            {% endblock header_consultas %}
                             <!-- Signup form-->
                             <!-- * * * * * * * * * * * * * * *-->
                             <!-- * * SB Forms Contact Form * *-->
