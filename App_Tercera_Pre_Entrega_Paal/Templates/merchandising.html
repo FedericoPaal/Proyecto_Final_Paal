@@ -1,5 +1,13 @@
 {% extends 'padre.html' %}
 
 {% block merchandising %}
-    
+
+    <h1> Formulario de Merchandising </h1>
+
+    <form action= "{% url 'Merchandising' %}" method="post">{% csrf_token %}
+        
+        {{mi_formulario.as_p}}
+
+        <button type="submit"> Enviar </button>
+    </form>
 {% endblock merchandising %}

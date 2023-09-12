@@ -2,8 +2,7 @@
 
 {% block inicio %}
     
-    <h1> ¿Quienes somos? </h1>
-
+    <h3> ¿Quienes somos? </h3>
     <p>     
         Somos una revisteria que ofrece nuevo contenido semanalmente de las novedades que se publican y de las mas interesantes para todo tipo de publico.
         <br>
@@ -11,6 +10,29 @@
         <br>
         No se pierda de nada en nuestra revisteria! 
     </p>
+
+    <br>
+
+    <h3> Podes buscar el libro o merchandising que mas te guste aqui: </h3>
+    <form action="{% url 'Buscar' %}" method="get">
+       
+        <p> Producto: <input type="text" name="producto">  </p>
+               
+        <button type="submit"> Enviar </button>
+    </form>
+
+    <br>
+
+    <p> Resultados de la busqueda: </p>
+
+    
+    {% if productos %}
+        <ul>  
+            {% for producto in productos %}
+                <li> {{producto}} </li>
+            {% endfor %}  
+        </ul>
+    {% endif %}
 
 {% endblock inicio %}
     

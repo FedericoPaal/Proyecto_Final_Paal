@@ -1,5 +1,13 @@
 {% extends 'padre.html' %}
 
 {% block consulta %}
-    
+
+    <h1> Formulario de Consultas </h1>
+
+    <form action="{% url 'Consultas' %}" method="post">{% csrf_token %}
+        
+        {{mi_formulario.as_p}}
+
+        <button type="submit"> Enviar </button>
+    </form>
 {% endblock consulta %}
