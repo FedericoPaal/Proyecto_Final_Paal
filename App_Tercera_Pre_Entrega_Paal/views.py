@@ -79,12 +79,10 @@ def buscar(req: HttpRequest):
 
     if req.GET["producto"]:
         producto = req.GET["producto"]
+        
+        objetos = Novedad.objects.filter(titulo__icontains=producto), Libro.objects.filter(titulo__icontains=producto), Merchandising.objects.filter(nombre__icontains=producto)
 
-        novedades = Novedad.objects.filter(titulo__icontains=producto)
-        #libro = Libro.objects.get(titulo=producto)
-        #merchandising =  Merchandising.objects.get(nombre=producto)
-
-        productos = novedades
+        productos = objetos
 
         return render(req, "inicio.html", {"productos": productos})
     else:
