@@ -18,7 +18,7 @@
 
     <br>
 
-    <h3> Podes buscar el libro o comic que mas te guste aqui: </h3>
+    <h3> Podes buscar el libro o comic que más te guste aqui: </h3>
     <form action="{% url 'Buscar' %}" method="get">
        
         <p> Producto/s: <input type="text" name="producto">  </p>
@@ -28,7 +28,7 @@
 
     <br>
 
-    <p> Resultados de la busqueda: </p>
+    <p> Resultados de la búsqueda: </p>
 
 
     {% if productos %}
@@ -38,7 +38,7 @@
             {% endfor %}  
         </ul>
     {% else %}
-        <h5> No se encontraron resultados de la busqueda </h5>
+        <h5> No se encontraron resultados de la búsqueda </h5>
     {% endif %}
 
 {% endblock inicio %}

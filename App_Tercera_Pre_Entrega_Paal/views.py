@@ -63,7 +63,7 @@ def consulta(req):
 
         if consulta_formulario.is_valid():
             data = consulta_formulario.cleaned_data
-            _consulta = Consulta(nombre=data["nombre"], email=data["email"], precio=data["precio"])
+            _consulta = Consulta(nombre=data["nombre"], email=data["email"], consulta=data["consulta"])
             _consulta.save()
             
             return render(req, "inicio.html")
