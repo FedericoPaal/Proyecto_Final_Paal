@@ -84,5 +84,5 @@ def buscar(req: HttpRequest):
 
         return render(req, "inicio.html", {"productos": productos})
     else:
-        return HttpResponse(f"No se encontro en la busqueda")
+        return HttpResponse(f"No se encontró en la búsqueda")
 
