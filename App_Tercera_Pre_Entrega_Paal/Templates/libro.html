@@ -6,13 +6,15 @@
 
 
 {% block libro %}
-
+<div class="padding_left_x5">
     <h1> Formulario de Libros </h1>
-
+</div>
+<div class="padding_left_x15">
     <form action="{% url 'Libros' %}" method="post">{% csrf_token %}
         
         {{mi_formulario.as_p}}
 
         <button type="submit"> Enviar </button>
     </form>
+</div>
 {% endblock libro %}

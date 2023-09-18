@@ -1,0 +1,29 @@
+{% extends 'padre.html' %}
+
+{% block header_login %}
+    <h1 class="mb-5"> Inicia Sesión! </h1>
+{% endblock header_login %}
+
+{% block novedad %}
+
+    <form action="{% url 'Login' %}" method="post">{% csrf_token %}
+        <div class="padding_left_x15">
+            <h5>
+                Inicia Sesión
+            </h5>
+        </div>
+        <div class="padding_left_x5">
+        {{mi_formulario.as_p}}
+
+        <button type="submit"> Ingresar </button>
+        </div>
+    </form>
+
+    <br>
+
+    <div class="padding_left_x15">
+        <h5>
+            ¿No te has registrado aún? <a href="{% url 'Registrar' %}"> Registrate aqui </a>
+        </h5>
+    </div>
+{% endblock novedad %}

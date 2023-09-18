@@ -15,6 +15,7 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+        <link href="{% static 'css/mis_estilos.css' %}" rel="stylesheet" />
     </head>
     <body>
        {% include 'navbar.html' %}
@@ -39,6 +40,15 @@
 
                             {% block header_consultas %}
                             {% endblock header_consultas %}
+
+                            {% block header_login %}
+                            {% endblock header_login %}
+
+                            {% block header_registro %}
+                            {% endblock header_registro %}
+
+                            {% block header_logout %}
+                            {% endblock header_logout %}
                             <!-- Signup form-->
                             <!-- * * * * * * * * * * * * * * *-->
                             <!-- * * SB Forms Contact Form * *-->

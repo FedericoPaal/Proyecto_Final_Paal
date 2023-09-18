@@ -7,12 +7,15 @@
 
 {% block merchandising %}
 
+<div class="padding_left_x5">
     <h1> Formulario de Merchandising </h1>
-
+</div> 
+<div class="padding_left_x15">
     <form action= "{% url 'Merchandising' %}" method="post">{% csrf_token %}
         
         {{mi_formulario.as_p}}
 
         <button type="submit"> Enviar </button>
     </form>
+</div>
 {% endblock merchandising %}

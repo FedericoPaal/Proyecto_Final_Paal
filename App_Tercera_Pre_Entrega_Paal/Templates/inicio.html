@@ -7,39 +7,54 @@
 
 {% block inicio %}
     
-    <h3> ¿Quienes somos? </h3>
-    <p>     
+    <div class="padding_left_x5">
+        <h3> ¿Quienes somos? </h3>
+    </div>
+
+    <div class="padding_left_x15">
+        <p>     
         Somos una revisteria que ofrece nuevo contenido semanalmente de las novedades que se publican y de las mas interesantes para todo tipo de publico.
         <br>
         No se pierda tampoco de nuestros productos! Contamos con merchandising de gran variedad de titulos reconocidos!
         <br>
         No se pierda de nada en nuestra revisteria! 
-    </p>
+        </p>
+    </div>
 
     <br>
 
-    <h3> Podes buscar el libro o comic que más te guste aqui: </h3>
+
+    <div class="padding_left_x5">
+        <h3> Podes buscar el libro o comic que más te guste aqui: </h3>
+    </div>
+    
     <form action="{% url 'Buscar' %}" method="get">
-       
-        <p> Producto/s: <input type="text" name="producto">  </p>
-               
-        <button type="submit"> Enviar </button>
+        <div class="padding_left_x15">
+            <p> Producto/s: <input type="text" name="producto">  </p>
+           
+            <button type="submit"> Enviar </button>
+        </div>     
     </form>
 
     <br>
 
-    <p> Resultados de la búsqueda: </p>
-
-
     {% if productos %}
+        <h6> Resultados de la búsqueda: </h6>
         <ul>  
             {% for producto in productos %}
                 <li> {{producto}} </li>
             {% endfor %}  
         </ul>
-    {% else %}
-        <h5> No se encontraron resultados de la búsqueda </h5>
-    {% endif %}
+    {% else %} 
 
+        {% if producto not in productos  %}
+            <h6> Resultados de la búsqueda: </h6>
+            <h5> No se encontraron resultados de la búsqueda </h5>
+        {% else %}
+            <h5>  </h5>
+        {% endif %}
+
+    {% endif %}
+        
 {% endblock inicio %}
     
