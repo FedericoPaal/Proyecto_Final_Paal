@@ -8,7 +8,7 @@
 {% block inicio %}
     
     <div class="padding_left_x5">
-        <h3> ¿Quienes somos? </h3>
+        <h3> ¿Quiénes somos? </h3>
     </div>
 
     <div class="padding_left_x15">
@@ -25,31 +25,35 @@
 
 
     <div class="padding_left_x5">
-        <h3> Podes buscar el libro o comic que más te guste aqui: </h3>
+        <h3> Buscá el libro o comic que más te guste aqui: </h3>
     </div>
     
     <form action="{% url 'Buscar' %}" method="get">
         <div class="padding_left_x15">
-            <p> Producto/s: <input type="text" name="producto">  </p>
-           
-            <button type="submit"> Enviar </button>
+            <p> Producto/s: <input type="text" name="producto">      <button type="submit"> Enviar </button> </p>
         </div>     
     </form>
 
     <br>
 
     {% if productos %}
-        <h6> Resultados de la búsqueda: </h6>
-        <ul>  
-            {% for producto in productos %}
-                <li> {{producto}} </li>
-            {% endfor %}  
-        </ul>
+        <div class="padding_left_x5">
+            <h5> Resultados de la búsqueda: </h5>
+            <ul>  
+                {% for producto in productos %}
+                    <li> {{producto}} </li>
+                {% endfor %}  
+            </ul>
+        </div>
     {% else %} 
 
         {% if producto not in productos  %}
-            <h6> Resultados de la búsqueda: </h6>
-            <h5> No se encontraron resultados de la búsqueda </h5>
+        <div class="padding_left_x5">
+            <h5> Resultados de la búsqueda: </h5>
+        </div>
+        <div class="padding_left_x35">
+            <h4> No se encontraron resultados de la búsqueda </h4>
+        </div>
         {% else %}
             <h5>  </h5>
         {% endif %}

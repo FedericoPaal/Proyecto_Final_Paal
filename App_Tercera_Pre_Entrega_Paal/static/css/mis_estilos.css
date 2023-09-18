@@ -7,8 +7,20 @@
     padding-left: 15px;
 }
 
+.padding_left_x35{
+    padding-left: 35px;
+}
+
 .padding_left_x500{
     padding-left: 500px;
+}
+
+.padding_right_x50{
+    padding-right: 50px;
+}
+
+.padding_right_x100{
+    padding-right: 100px;
 }
 
 .padding_right_x200{

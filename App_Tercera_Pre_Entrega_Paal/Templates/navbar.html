@@ -1,14 +1,19 @@
  <!-- Navigation-->
 <nav class="navbar navbar-light bg-light static-top">
     <div class="container">
-        <div class="padding_right_x200">
             <a class="navbar-brand" href="{% url 'Inicio' %}"> Inicio </a>
-        </div>
-        <a class="navbar-brand" href="{% url 'Novedades' %}"> Novedades </a>
-        <a class="navbar-brand" href="{% url 'Libros' %}"> Libros </a>
-        <a class="navbar-brand" href="{% url 'Merchandising' %}"> Merchandising </a>
-        <a class="navbar-brand" href="{% url 'Consultas' %}"> Consultas </a>
-        
+
+            <div class="padding_right_x50">
+            </div>
+
+            <a class="navbar-brand" href="{% url 'Novedades' %}"> Novedades </a>
+            <a class="navbar-brand" href="{% url 'Libros' %}"> Libros </a>
+            <a class="navbar-brand" href="{% url 'Merchandising' %}"> Merchandising </a>
+            <a class="navbar-brand" href="{% url 'Consultas' %}"> Consultas </a>
+
+            <div class="padding_right_x50">
+            </div>
+
         {% if user.is_authenticated %}
             <p> Bienvenido/a {{user.username}} </p>
             <a class="btn btn-primary" href="{% url 'Logout' %}"> Cerrar Sesión </a>

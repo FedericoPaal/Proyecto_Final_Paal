@@ -90,7 +90,7 @@ def buscar(req: HttpRequest):
         return render(req, "inicio.html", {"productos": productos})
     
     else:
-        return HttpResponse(f"No se encontró en la búsqueda")
+        return render(req, "inicio.html")
 
 
 def loginView(req):
