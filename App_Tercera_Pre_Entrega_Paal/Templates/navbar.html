@@ -14,9 +14,16 @@
             <div class="padding_right_x50">
             </div>
 
-        {% if user.is_authenticated %}
-            <p> Bienvenido/a {{user.username}} </p>
+        {% if user.is_authenticated %}                
+            <p> Bienvenido/a <a href="{% url 'Editar_Usuario' %}"> {{user.username}} </a> </p>
+            <p> <a href="{% url 'Agregar_Avatar' %}"> Cambiar avatar </a> </p>
+            {% if url_avatar %}
+                <div>
+                    <img src="{{url_avatar}}" height="35px" alt="avatar"> 
+                </div> 
+            {% endif %}
             <a class="btn btn-primary" href="{% url 'Logout' %}"> Cerrar Sesión </a>
+            <a class="btn btn-primary" href="{% url 'Carrito_de_Compras' %}"> Mi Carrito </a>
         {% else %}
             <a class="btn btn-primary" href="{% url 'Login' %}"> Iniciar Sesión </a>
         {% endif %}

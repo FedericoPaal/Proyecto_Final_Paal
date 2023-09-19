@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpRequest
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -10,7 +10,11 @@ from .forms import *
 
 # Create your views here.
 def inicio(req):
-    return render(req, "inicio.html")
+    try:
+        avatar = Avatar.objects.get(user=req.user.id)
+        return render(req, "inicio.html", {"url_avatar": avatar.imagen.url})
+    except:
+        return render(req, "inicio.html")
 
 @login_required
 def novedad(req):
@@ -136,4 +140,63 @@ def register(req):
     else:
         mi_formulario = UserCreationForm()
         return render(req, "registro.html", {"mi_formulario": mi_formulario})
- 
+    
+
+def editar_perfil(req):
+
+    usuario = req.user
+
+    if req.method == 'POST':
+
+        mi_formulario = UserEditForm(req.POST, instance=req.user)
+
+        if mi_formulario.is_valid():
+
+            data = mi_formulario.cleaned_data
+            usuario.first_name = data["first_name"]
+            usuario.last_name = data["last_name"]
+            usuario.email = data["email"]
+            usuario.set_password(data["password1"])
+            usuario.save()
+
+            return render(req, "editarUsuario.html", {"mi_formulario": mi_formulario, "mensaje": "El usuario ha sido actualizado con éxito"})
+        else:
+            return render(req, "editarUsuario.html", {"mi_formulario": mi_formulario})
+    
+    else:
+        mi_formulario = UserEditForm(instance=usuario)
+        return render(req, "editarUsuario.html", {"mi_formulario": mi_formulario})
+
+
+def agregar_avatar(req):
+
+    if req.method == 'POST':
+
+        mi_formulario = Avatar_Formulario(req.POST, req.FILES)
+
+        if mi_formulario.is_valid():
+
+            data = mi_formulario.cleaned_data
+            avatar = Avatar(user=req.user, imagen=data["imagen"])
+            avatar.save()
+
+            return render(req, "agregarAvatar.html", {"mensaje": "El avatar ha sido actualizado con éxito"})
+    
+    else:
+        mi_formulario = Avatar_Formulario()
+        return render(req, "agregarAvatar.html", {"mi_formulario": mi_formulario})
+
+
+def carrito_compras(req: HttpRequest):
+
+    #if req.GET["producto"]:
+        #producto = req.GET["producto"]
+        
+        productos_carrito = Libro.objects.all()
+
+        lista_carrito = [productos_carrito]
+
+        return render(req, "carrito.html", {"productos": lista_carrito})
+    
+    #else:
+        #return render(req, "inicio.html")

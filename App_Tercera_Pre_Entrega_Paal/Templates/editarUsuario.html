@@ -1,0 +1,24 @@
+{% extends 'padre.html' %}
+
+{% block header_consultas %}
+    <h1 class="mb-5"> Editar Usuario </h1>
+{% endblock header_consultas %}
+
+{% block consulta %}
+
+<div class="padding_left_x15">
+    <form action="{% url 'Editar_Usuario' %}" method="post">{% csrf_token %}
+        <div>
+            <h5> Sus datos: </h5>
+            {{mi_formulario.as_p}}
+            <button type="submit"> Actualizar </button>
+        </div>
+    </form>
+</div>
+
+
+{{mensaje}}
+    
+    
+
+{% endblock consulta %}
