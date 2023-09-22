@@ -47,6 +47,11 @@ def libro(req):
     else:
         libro_formulario = Libros_Formulario()
         return render(req, "libro.html", {"mi_formulario": libro_formulario})
+    
+def libros(req):
+    lista_libros = Libro.objects.all()
+
+    return render(req, "listaLibros.html", {"lista_libros": lista_libros})
 
 @login_required
 def merchandising(req):
@@ -115,7 +120,7 @@ def loginView(req):
                 login(req, user)
                 return render(req, "inicio.html", {"mensaje": f"Bienvenido/a {usuario}!"})
             
-        return render(req, "inicio.html", {"mensaje": f"Datos incorrectos"})
+        return render(req, "inicio.html", {"mensaje2": f"Usuario y/o contraseña incorrectos. Pruebe de nuevo por favor."})
 
     else:
         mi_formulario = AuthenticationForm()
@@ -135,7 +140,7 @@ def register(req):
             mi_formulario.save()
             return render(req, "inicio.html", {"mensaje": f"Usuario {usuario} creado con éxito!"})
 
-        return render(req, "inicio.html", {"mensaje": f"No se cumplen con todos los campos a completar"})
+        return render(req, "inicio.html", {"mensaje2": f"Repita correctamente la contraseña"})
 
     else:
         mi_formulario = UserCreationForm()
@@ -189,14 +194,25 @@ def agregar_avatar(req):
 
 def carrito_compras(req: HttpRequest):
 
-    #if req.GET["producto"]:
-        #producto = req.GET["producto"]
-        
-        productos_carrito = Libro.objects.all()
+    productos_carrito = Libro.objects.all()
 
-        lista_carrito = [productos_carrito]
+    lista_carrito = productos_carrito
 
-        return render(req, "carrito.html", {"productos": lista_carrito})
-    
-    #else:
-        #return render(req, "inicio.html")
+    return render(req, "carrito.html", {"lista_carrito": lista_carrito})
+
+
+def comprar(req):
+    return render(req, "carrito.html", {"mensaje": "La compra de sus producto/s ha sido exitosa! Gracias por elegirnos!"})
+
+
+def agregar_al_carrito(req):
+
+    acumulador_productos = []
+
+    productos_carrito = Libro.objects.all()
+
+    lista_carrito = productos_carrito
+
+    acumulador_productos += lista_carrito
+
+    return render(req, "carrito.html", {"acumulador_productos": acumulador_productos})

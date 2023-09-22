@@ -26,3 +26,23 @@
 .padding_right_x200{
     padding-right: 200px;
 }
+
+.cards_productos{
+    margin-right: 15px;
+    margin-left: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.cards_presentacion{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    row-gap: 20px;
+    justify-items: center;
+    margin: 20px;
+}
+
+.center{
+    justify-items: center;
+}
+

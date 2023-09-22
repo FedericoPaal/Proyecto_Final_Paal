@@ -16,4 +16,8 @@ urlpatterns = [
     path('editar-usuario/', editar_perfil, name="Editar_Usuario"),
     path('agregar-avatar/', agregar_avatar, name="Agregar_Avatar"),
     path('carrito-compras/', carrito_compras, name="Carrito_de_Compras"),
+    path('lista-libros/', libros, name="Lista_Libros"),
+    path('comprar/', comprar, name="Comprar"),
+
+    path('agregar_carrito/', agregar_al_carrito, name="Agregar_Carrito"),
 ]

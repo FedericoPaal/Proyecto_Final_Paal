@@ -5,7 +5,7 @@
 
             <div class="padding_right_x50">
             </div>
-
+    
             <a class="navbar-brand" href="{% url 'Novedades' %}"> Novedades </a>
             <a class="navbar-brand" href="{% url 'Libros' %}"> Libros </a>
             <a class="navbar-brand" href="{% url 'Merchandising' %}"> Merchandising </a>
@@ -14,19 +14,48 @@
             <div class="padding_right_x50">
             </div>
 
-        {% if user.is_authenticated %}                
-            <p> Bienvenido/a <a href="{% url 'Editar_Usuario' %}"> {{user.username}} </a> </p>
-            <p> <a href="{% url 'Agregar_Avatar' %}"> Cambiar avatar </a> </p>
-            {% if url_avatar %}
-                <div>
-                    <img src="{{url_avatar}}" height="35px" alt="avatar"> 
+        {% if user.is_authenticated %}   
+            <section>   
+
+            <p class="padding_left_x35"> {{user.username}} </p>
+
+            <select name="links" id="" size="1" onchange="window.location.href=this.value;">
+                <option value=""> Edite su perfil aqui: </option>
+                <option value="http://127.0.0.1:8000/App-Tercera-Pre-Entrega-Paal/editar-usuario/"> Usuario </option>
+                <option value="http://127.0.0.1:8000/App-Tercera-Pre-Entrega-Paal/agregar-avatar/"> Avatar </option>
+            </select>
+
+            </section>
+
+                {% if url_avatar %}
+                <div>  
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT36xX6fl85ctrEkYHj1r6sMJsFczKC6n41ItPIRw0ZtJRY5yhBjkgJY4HP7LtwXnd5B0M&usqp=CAU" height="35px" alt="avatar"> 
                 </div> 
-            {% endif %}
+                {% endif %}
             <a class="btn btn-primary" href="{% url 'Logout' %}"> Cerrar Sesión </a>
-            <a class="btn btn-primary" href="{% url 'Carrito_de_Compras' %}"> Mi Carrito </a>
+            <a href="{% url 'Carrito_de_Compras' %}"> <img src="https://w7.pngwing.com/pngs/225/984/png-transparent-computer-icons-shopping-cart-encapsulated-postscript-shopping-cart-angle-black-shopping.png" alt="" width="60" height="35"> </a>
         {% else %}
             <a class="btn btn-primary" href="{% url 'Login' %}"> Iniciar Sesión </a>
         {% endif %}
 
     </div>
 </nav>
+
+
+{% if mensaje %}
+    <nav class="navbar navbar-light"  style="background-color: darkseagreen;">
+        <div class="padding_left_x35">
+            <h5> {{mensaje}} </h5>
+    <div>
+    </nav>
+{% endif %}
+
+{% if mensaje2 %}
+    <nav class="navbar navbar-light"  style="background-color:lightcoral ;">
+        <div class="padding_left_x35">
+            <h5> {{mensaje2}} </h5>
+    <div>
+    </nav>
+{% endif %}  
+
+    

@@ -35,7 +35,7 @@ class UserEditForm(UserChangeForm):
         help_text="",
         widget=forms.HiddenInput(), required=False
     )
-
+    
     password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
     password2 = forms.CharField(label="Repita la contraseña", widget=forms.PasswordInput)
 
