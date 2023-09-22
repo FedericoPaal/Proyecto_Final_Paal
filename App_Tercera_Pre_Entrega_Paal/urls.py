@@ -18,6 +18,12 @@ urlpatterns = [
     path('carrito-compras/', carrito_compras, name="Carrito_de_Compras"),
     path('lista-libros/', libros, name="Lista_Libros"),
     path('comprar/', comprar, name="Comprar"),
+    path('register-cliente/', crea_cliente, name="Crea_Cliente"),
 
     path('agregar_carrito/', agregar_al_carrito, name="Agregar_Carrito"),
 ]
+
+
+#<select name="links" id="" size="1" onchange="window.location.href=this.value;">
+#    <option value=""> Edite su perfil aqui: </option>
+#</select>

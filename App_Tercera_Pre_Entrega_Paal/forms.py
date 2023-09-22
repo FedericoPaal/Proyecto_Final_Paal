@@ -60,3 +60,10 @@ class Avatar_Formulario(forms.ModelForm):
     class Meta:
         model = Avatar
         fields = ("imagen",)
+
+
+class Cliente_Formulario(forms.ModelForm):
+    
+    class Meta:
+        model=Cliente
+        fields = ("nombre", "apellido", "email")

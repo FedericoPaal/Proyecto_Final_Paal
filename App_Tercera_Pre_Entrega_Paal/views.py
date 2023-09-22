@@ -16,7 +16,6 @@ def inicio(req):
     except:
         return render(req, "inicio.html")
 
-@login_required
 def novedad(req):
 
     if req.method == "POST":
@@ -32,7 +31,6 @@ def novedad(req):
         novedad_formulario = Novedades_Formulario()
         return render(req, "novedad.html", {"mi_formulario": novedad_formulario})
 
-@login_required
 def libro(req):
 
     if req.method == "POST":
@@ -53,7 +51,6 @@ def libros(req):
 
     return render(req, "listaLibros.html", {"lista_libros": lista_libros})
 
-@login_required
 def merchandising(req):
 
     if req.method == "POST":
@@ -203,6 +200,45 @@ def carrito_compras(req: HttpRequest):
 
 def comprar(req):
     return render(req, "carrito.html", {"mensaje": "La compra de sus producto/s ha sido exitosa! Gracias por elegirnos!"})
+
+
+def crea_cliente(req):
+
+    if req.method == "POST":
+        
+        info = req.POST
+
+        mi_formulario = Cliente_Formulario({
+            "nombre": info["nombre"],
+            "apellido": info["apellido"],
+            "email": info["email"]
+        })
+
+        userForm = UserCreationForm({
+            "username": info["username"],
+            "password1": info["password1"],
+            "password2": info["password2"]
+        })
+
+        if mi_formulario.is_valid() and userForm.is_valid():
+            
+            data = mi_formulario.cleaned_data
+            data.update(userForm.cleaned_data)
+
+            user =User(username=data["username"])
+            user.set_password(data["password1"])
+            user.save()
+
+            cliente = Cliente(nombre=data["nombre"], apellido=data["apellido"], email=data["email"], user=user)
+            cliente.save()
+
+            return render(req, "inicio.html", {"mensaje": "Usuario creado con éxito"})
+
+    else:
+
+        mi_formulario = Cliente_Formulario()
+        userForm = UserCreationForm()
+        return render(req, "clienteFormulario.html", {"mi_formulario": mi_formulario, "userForm": userForm})
 
 
 def agregar_al_carrito(req):

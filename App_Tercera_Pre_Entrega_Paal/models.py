@@ -57,3 +57,24 @@ class Avatar(models.Model):
 
     def __str__(self):
         return f"{self.imagen}"
+    
+
+class Cliente(models.Model):
+    nombre = models.CharField(max_length=40)
+    apellido = models.CharField(max_length=40)
+    email = models.EmailField(max_length=40)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f"{self.nombre} {self.apellido}"
+
+
+
+class Staff(models.Model):
+    nombre = models.CharField(max_length=40)
+    apellido = models.CharField(max_length=40)
+    email = models.EmailField(max_length=40)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.nombre} {self.apellido}"
