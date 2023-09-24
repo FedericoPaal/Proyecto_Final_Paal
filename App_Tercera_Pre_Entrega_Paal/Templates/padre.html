@@ -17,10 +17,10 @@
         <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
         <link href="{% static 'css/mis_estilos.css' %}" rel="stylesheet" />
     </head>
-    <body>
+    <body style="background-color:rgb(51, 131, 197);">
        {% include 'navbar.html' %}
         <!-- Masthead-->
-        <header class="masthead">
+        <header class="masthead" style="border-bottom:5px solid #000;">
             <div class="container position-relative">
                 <div class="row justify-content-center">
                     <div class="col-xl-6">
@@ -63,6 +63,7 @@
             </div>
         </header>
         <!-- inicio.html -->
+        <div style="border-bottom:5px solid #000;">
         {% block inicio %}
         {% endblock inicio %}
 
@@ -81,39 +82,41 @@
         <!-- consulta.html -->
         {% block consulta %}
         {% endblock consulta %}    
-            
+        </div>
         <!-- Footer-->
-        <footer class="footer bg-light">
+        <div style="border-bottom:5px solid #000;">
+        <footer class="footer" style="background-color:rgb(185, 72, 72);">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
                         <ul class="list-inline mb-2">
-                            <li class="list-inline-item"><a href="#!">About</a></li>
+                            <li class="list-inline-item" ><a href="{% url 'About_Me' %}" style="color:black;">About</a></li>
                             <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="#!">Contact</a></li>
+                            <li class="list-inline-item"><a href="#!" style="color:black;">Contact</a></li>
                             <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="#!">Terms of Use</a></li>
+                            <li class="list-inline-item"><a href="#!" style="color:black;">Terms of Use</a></li>
                             <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="#!">Privacy Policy</a></li>
+                            <li class="list-inline-item"><a href="#!" style="color:black;">Privacy Policy</a></li>
                         </ul>
-                        <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2023. All Rights Reserved.</p>
+                        <p style="color:black;">&copy; Your Website 2023. All Rights Reserved.</p>
                     </div>
                     <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
                         <ul class="list-inline mb-0">
                             <li class="list-inline-item me-4">
-                                <a href="#!"><i class="bi-facebook fs-3"></i></a>
+                                <a href="#!" style="color:black;"><i class="bi-facebook fs-3"></i></a>
                             </li>
                             <li class="list-inline-item me-4">
-                                <a href="#!"><i class="bi-twitter fs-3"></i></a>
+                                <a href="#!" style="color:black;"><i class="bi-twitter fs-3"></i></a>
                             </li>
                             <li class="list-inline-item">
-                                <a href="#!"><i class="bi-instagram fs-3"></i></a>
+                                <a href="#!" style="color:black;"><i class="bi-instagram fs-3"></i></a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
         </footer>
+    </div>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->

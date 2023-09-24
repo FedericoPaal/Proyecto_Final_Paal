@@ -1,19 +1,22 @@
 {% extends 'padre.html' %}
 
 {% block header_consultas %}
-    <h1 class="mb-5"> Haga sus Consultas! </h1>
+    <h1 class="mb-5" style="color: rgb(57, 50, 100);"> Haga sus Consultas! </h1>
 {% endblock header_consultas %}
 
 {% block consulta %}
-<div class="padding_left_x5">
+<div class="padding_left_x5" style="color: black;">
     <h1> Formulario de Consultas </h1>
 </div>
-<div class="padding_left_x15">
+<div class="padding_left_x15" style="color: black;">
     <form action="{% url 'Consultas' %}" method="post">{% csrf_token %}
-        
-        {{mi_formulario.as_p}}
-
-        <button type="submit"> Enviar </button>
+        <div style="font-size: 20px;">
+            {{mi_formulario.as_p}}
+            <button type="submit"> Enviar </button>
+        </div>
     </form>
 </div>
+
+<br>
+
 {% endblock consulta %}

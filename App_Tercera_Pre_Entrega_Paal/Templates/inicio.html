@@ -1,43 +1,32 @@
 {% extends 'padre.html' %}
 
 {% block header_inicio %}
-    <h1 class="mb-5"> Bienvenido a nuestra Revisteria! </h1>
+    <h1 class="mb-5" style="color: rgb(68, 60, 119);"> Bienvenido a nuestra Revisteria! </h1>
 {% endblock header_inicio %}
 
 
 {% block inicio %}
     
-    <div class="padding_left_x5">
-        <h3> ¿Quiénes somos? </h3>
+    <div class="padding_left_x5" style="color: black;">
+        <h2> ¿Quiénes somos? </h2>
     </div>
 
-    <div class="padding_left_x15">
-        <p>     
-        Somos una revisteria que ofrece nuevo contenido semanalmente de las novedades que se publican y de las mas interesantes para todo tipo de publico.
-        <br>
-        No se pierda tampoco de nuestros productos! Contamos con merchandising de gran variedad de titulos reconocidos!
-        <br>
-        No se pierda de nada en nuestra revisteria! 
-        </p>
+    <div class="padding_left_x15" style="color: black;">
+        <div style="font-size: 20px;">
+            <p>     
+            Somos una revisteria que ofrece contenido de cómics antiguos de las primeras ediciones y de los más interesantes y entretenidos para todo tipo de público.
+            <br>
+            No se pierda tampoco de nuestros productos! Contamos con merchandising de gran variedad de titulos reconocidos!
+            <br>
+            No se pierda de nada en nuestra revisteria! 
+            </p>
+        </div>
     </div>
-
-    <br>
-
-
-    <div class="padding_left_x5">
-        <h3> Buscá el libro o comic que más te guste aqui: </h3>
-    </div>
-    
-    <form action="{% url 'Buscar' %}" method="get">
-        <div class="padding_left_x15">
-            <p> Producto/s: <input type="text" name="producto">      <button type="submit"> Enviar </button> </p>
-        </div>     
-    </form>
 
     <br>
 
     {% if productos %}
-        <div class="padding_left_x5">
+        <div class="padding_left_x5" style="color: black;">
             <h5> Resultados de la búsqueda: </h5>
             <ul>  
                 {% for producto in productos %}
@@ -48,10 +37,10 @@
     {% else %} 
 
         {% if producto not in productos  %}
-        <div class="padding_left_x5">
+        <div class="padding_left_x5" style="color: black;">
             <h5> Resultados de la búsqueda: </h5>
         </div>
-        <div class="padding_left_x35">
+        <div class="padding_left_x35" style="color: black;">
             <h4> No se encontraron resultados de la búsqueda </h4>
         </div>
         {% else %}

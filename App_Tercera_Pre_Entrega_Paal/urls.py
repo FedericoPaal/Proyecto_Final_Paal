@@ -19,6 +19,7 @@ urlpatterns = [
     path('lista-libros/', libros, name="Lista_Libros"),
     path('comprar/', comprar, name="Comprar"),
     path('register-cliente/', crea_cliente, name="Crea_Cliente"),
+    path('about-me/', about_me, name="About_Me"),
 
     path('agregar_carrito/', agregar_al_carrito, name="Agregar_Carrito"),
 ]

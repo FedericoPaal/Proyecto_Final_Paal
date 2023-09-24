@@ -27,6 +27,10 @@
     padding-right: 200px;
 }
 
+.padding_right_x500{
+    padding-right: 500px;
+}
+
 .cards_productos{
     margin-right: 15px;
     margin-left: 15px;
@@ -46,3 +50,13 @@
     justify-items: center;
 }
 
+.border-color{
+    background-color:rgb(185, 72, 72);
+    border-bottom-width: 5px;
+    border-bottom-color: black;
+}
+
+.navbar
+{
+    border-bottom:5px solid #000;
+}

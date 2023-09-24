@@ -1,13 +1,13 @@
 {% extends 'padre.html' %}
 
 {% block header_login %}
-    <h1 class="mb-5"> Tu Carrito de Compras </h1>
+    <h1 class="mb-5" style="color: rgb(57, 50, 100);"> Tu Carrito de Compras </h1>
 {% endblock header_login %}
 
 {% block novedad %}
 
-    <div class="padding_left_x5">
-        <h3> Aqui tenes tu carrito de compras: </h3>
+    <div class="padding_left_x5" style="color: black;">
+        <h2> Aqui tenes tu carrito de compras: </h2>
     </div>
 
     <br>
@@ -82,7 +82,7 @@
         </section>
 
         <div class="padding_left_x500">
-            <a href="{% url 'Comprar' %}" class="btn btn-primary"> Comprar </a>
+            <a href="{% url 'Comprar' %}" class="btn btn-dark"> Comprar </a>
         </div>
 
 

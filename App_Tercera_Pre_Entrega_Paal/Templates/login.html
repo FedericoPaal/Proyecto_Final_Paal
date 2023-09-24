@@ -1,29 +1,31 @@
 {% extends 'padre.html' %}
 
 {% block header_login %}
-    <h1 class="mb-5"> Inicia Sesión! </h1>
+    <h1 class="mb-5" style="color: rgb(57, 50, 100);"> Inicia Sesión! </h1>
 {% endblock header_login %}
 
 {% block novedad %}
 
     <form action="{% url 'Login' %}" method="post">{% csrf_token %}
-        <div class="padding_left_x15">
-            <h5>
+        <div class="padding_left_x15" style="color: black;">
+            <h2>
                 Inicia Sesión
-            </h5>
+            </h2>
         </div>
-        <div class="padding_left_x5">
-        {{mi_formulario.as_p}}
-
-        <button type="submit"> Ingresar </button>
+        <div class="padding_left_x5" style="color: black;">
+            <div style="font-size: 20px;">
+                {{mi_formulario.as_p}}
+            
+                <button type="submit"> Ingresar </button>
+            </div>
         </div>
     </form>
 
     <br>
 
-    <div class="padding_left_x15">
+    <div class="padding_left_x15" style="color: black;">
         <h5>
-            ¿No te has registrado aún? <a href="{% url 'Registrar' %}"> Registrate aqui </a>
+            ¿No te has registrado aún? <a href="{% url 'Crea_Cliente' %}" style="color: black;"> Registrate aqui </a>
         </h5>
     </div>
 {% endblock novedad %}

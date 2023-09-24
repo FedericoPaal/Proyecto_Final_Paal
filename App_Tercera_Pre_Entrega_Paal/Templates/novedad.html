@@ -2,20 +2,49 @@
 
 
 {% block header_novedad %}
-    <h1 class="mb-5"> Bienvenido a nuestras Novedades! </h1>
+    <h1 class="mb-5" style="color: rgb(57, 50, 100);"> Nuestras Novedades </h1>
 {% endblock header_novedad %}
     
 
 {% block novedad %}
-<div class="padding_left_x5">
+
+
+{% if user.cliente %}
+    <section class="cards_presentacion">
+    <div class="card" style="width: 18rem;">
+            <img src="https://static.wikia.nocookie.net/marvel_dc/images/3/3d/Superman_v.1_1.jpg/revision/latest?cb=20211014204109" height=435 alt="">
+            <div class="card-body" style="background-color:rgb(151, 200, 233);">
+            <h5 class="card-title"> Superman Vol 1 </h5>
+            <p class="card-text"> $2200.00 </p>
+            <a href="#" class="btn btn-dark"> Añadir al carrito </a>
+            </div>
+    </div>
+</section>
+{% endif %}
+
+{% if not user.cliente and not user.staff %}
+    <section class="cards_presentacion">
+    <div class="card" style="width: 18rem;">
+            <img src="https://static.wikia.nocookie.net/marvel_dc/images/3/3d/Superman_v.1_1.jpg/revision/latest?cb=20211014204109" height=435 alt="">
+            <div class="card-body" style="background-color:rgb(151, 200, 233);">
+            <h5 class="card-title"> Superman Vol 1 </h5>
+            <p class="card-text"> $2200.00 </p>
+            <a href="#" class="btn btn-dark"> Añadir al carrito </a>
+            </div>
+    </div>
+</section>
+{% endif %}
+
+{% if user.staff %}
+<div class="padding_left_x5" style="color: black;">
     <h1> Formulario de Novedades </h1>
 </div>    
-<div class="padding_left_x15">
+<div class="padding_left_x15" style="color: black;">
     <form action="{% url 'Novedades' %}" method="post">{% csrf_token %}
-        
-        {{mi_formulario.as_p}}
-
-        <button type="submit"> Enviar </button>
+        <div style="font-size: 20px;">
+            {{mi_formulario.as_p}}
+            <button type="submit"> Enviar </button>
+        </div>
     </form>
 </div>
 
@@ -23,13 +52,14 @@
 
 <section class="cards_presentacion">
     <div class="card" style="width: 18rem;">
-            <img src="https://static.wikia.nocookie.net/marvel_dc/images/3/3d/Superman_v.1_1.jpg/revision/latest?cb=20211014204109"  alt="">
-            <div class="card-body">
+            <img src="https://static.wikia.nocookie.net/marvel_dc/images/3/3d/Superman_v.1_1.jpg/revision/latest?cb=20211014204109" height=435 alt="">
+            <div class="card-body" style="background-color:rgb(151, 200, 233);">
             <h5 class="card-title"> Superman Vol 1 </h5>
             <p class="card-text"> $2200.00 </p>
-            <a href="#" class="btn btn-primary"> Añadir al carrito </a>
+            <a href="#" class="btn btn-dark"> Añadir al carrito </a>
             </div>
     </div>
 </section>
+{% endif %}
 
 {% endblock novedad %}

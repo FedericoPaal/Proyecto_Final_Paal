@@ -1,20 +1,125 @@
 {% extends 'padre.html' %}
 
 {% block header_libro %}
-    <h1 class="mb-5"> Bienvenido a nuestros Libros! </h1>
+    <h1 class="mb-5" style="color: rgb(57, 50, 100);"> Nuestros Libros </h1>
 {% endblock header_libro %}
 
 
 {% block libro %}
-<div class="padding_left_x5">
+
+
+{% if user.cliente %}
+    <section class="cards_presentacion">
+        <div class="card" style="width: 18rem;">
+            <img src="https://static.wikia.nocookie.net/batman/images/1/17/Batman_Vol.1_1.jpg/revision/latest?cb=20171106121437&path-prefix=es" height=435 alt="">
+            <div class="card-body" style="background-color:rgb(151, 200, 233);">
+            <h5 class="card-title"> Batman Vol 1 </h5>
+            <p class="card-text"> $2000.00 </p>
+            <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <img src="https://static.wikia.nocookie.net/marvel_dc/images/6/6a/Batman_2.jpg/revision/latest?cb=20141004170008" height=435 alt="">
+            <div class="card-body" style="background-color:rgb(151, 200, 233);">
+            <h5 class="card-title"> Batman Vol 2 </h5>
+            <p class="card-text"> $2000.00 </p>
+            <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <img src="https://static.wikia.nocookie.net/marveldatabase/images/8/88/Hulk_Vol_1_1.jpg/revision/latest?cb=20200505012644" height=435 alt="">
+            <div class="card-body" style="background-color:rgb(151, 200, 233);">
+            <h5 class="card-title"> Hulk Vol 1 </h5>
+            <p class="card-text"> $2200.00 </p>
+            <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <img src="https://static.wikia.nocookie.net/spiderman/images/7/75/Amazing_Spider-Man_Vol_1_1.png/revision/latest?cb=20190312224741&path-prefix=es" height=435 alt="">
+            <div class="card-body" style="background-color:rgb(151, 200, 233);">
+            <h5 class="card-title"> Spider-Man Vol 1 </h5>
+            <p class="card-text"> $2000.00 </p>
+            <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <img src="https://static.wikia.nocookie.net/marvel/images/9/9f/Captain_America_Comics_Vol_1_1.jpg/revision/latest?cb=20191109194648&path-prefix=es" height=435 alt="">
+            <div class="card-body" style="background-color:rgb(151, 200, 233);">
+            <h5 class="card-title"> Capitan América Vol 1 </h5>
+            <p class="card-text"> $2200.00 </p>
+            <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
+            </div>
+        </div>
+
+</section>
+{% endif %}
+
+{% if not user.cliente and not user.staff  %}
+
+    <section class="cards_presentacion">
+        <div class="card" style="width: 18rem;">
+            <img src="https://static.wikia.nocookie.net/batman/images/1/17/Batman_Vol.1_1.jpg/revision/latest?cb=20171106121437&path-prefix=es" height=435 alt="">
+            <div class="card-body" style="background-color:rgb(151, 200, 233);">
+            <h5 class="card-title"> Batman Vol 1 </h5>
+            <p class="card-text"> $2000.00 </p>
+            <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <img src="https://static.wikia.nocookie.net/marvel_dc/images/6/6a/Batman_2.jpg/revision/latest?cb=20141004170008" height=435 alt="">
+            <div class="card-body" style="background-color:rgb(151, 200, 233);">
+            <h5 class="card-title"> Batman Vol 2 </h5>
+            <p class="card-text"> $2000.00 </p>
+            <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <img src="https://static.wikia.nocookie.net/marveldatabase/images/8/88/Hulk_Vol_1_1.jpg/revision/latest?cb=20200505012644" height=435 alt="">
+            <div class="card-body" style="background-color:rgb(151, 200, 233);">
+            <h5 class="card-title"> Hulk Vol 1 </h5>
+            <p class="card-text"> $2200.00 </p>
+            <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <img src="https://static.wikia.nocookie.net/spiderman/images/7/75/Amazing_Spider-Man_Vol_1_1.png/revision/latest?cb=20190312224741&path-prefix=es" height=435 alt="">
+            <div class="card-body" style="background-color:rgb(151, 200, 233);">
+            <h5 class="card-title"> Spider-Man Vol 1 </h5>
+            <p class="card-text"> $2000.00 </p>
+            <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
+            </div>
+        </div>
+
+        <div class="card" style="width: 18rem;">
+            <img src="https://static.wikia.nocookie.net/marvel/images/9/9f/Captain_America_Comics_Vol_1_1.jpg/revision/latest?cb=20191109194648&path-prefix=es" height=435 alt="">
+            <div class="card-body" style="background-color:rgb(151, 200, 233);">
+            <h5 class="card-title"> Capitan América Vol 1 </h5>
+            <p class="card-text"> $2200.00 </p>
+            <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
+            </div>
+        </div>
+
+</section>
+{% endif %}
+
+{% if user.staff %}
+<div class="padding_left_x5" style="color: black;">
     <h1> Formulario de Libros </h1>
 </div>
-<div class="padding_left_x15">
-    <form action="{% url 'Libros' %}" method="post">{% csrf_token %}
-        
-        {{mi_formulario.as_p}}
 
-        <button type="submit"> Enviar </button>
+    <div class="padding_left_x15" style="color: black;">
+    <form action="{% url 'Libros' %}" method="post">{% csrf_token %}
+        <div style="font-size: 20px;">
+            {{mi_formulario.as_p}}
+            <button type="submit"> Enviar </button>
+        </div>
     </form>
 </div>
 
@@ -22,51 +127,52 @@
 
 <section class="cards_presentacion">
         <div class="card" style="width: 18rem;">
-            <img src="https://static.wikia.nocookie.net/batman/images/1/17/Batman_Vol.1_1.jpg/revision/latest?cb=20171106121437&path-prefix=es"  alt="">
-            <div class="card-body">
+            <img src="https://static.wikia.nocookie.net/batman/images/1/17/Batman_Vol.1_1.jpg/revision/latest?cb=20171106121437&path-prefix=es" height=435 alt="">
+            <div class="card-body" style="background-color:rgb(151, 200, 233);">
             <h5 class="card-title"> Batman Vol 1 </h5>
             <p class="card-text"> $2000.00 </p>
-            <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-primary"> Añadir al carrito </a>
+            <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
             </div>
         </div>
 
         <div class="card" style="width: 18rem;">
-            <img src="https://static.wikia.nocookie.net/marvel_dc/images/6/6a/Batman_2.jpg/revision/latest?cb=20141004170008"  alt="" height=440>
-            <div class="card-body">
+            <img src="https://static.wikia.nocookie.net/marvel_dc/images/6/6a/Batman_2.jpg/revision/latest?cb=20141004170008" height=435 alt="">
+            <div class="card-body" style="background-color:rgb(151, 200, 233);">
             <h5 class="card-title"> Batman Vol 2 </h5>
             <p class="card-text"> $2000.00 </p>
-            <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-primary"> Añadir al carrito </a>
+            <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
             </div>
         </div>
 
         <div class="card" style="width: 18rem;">
-            <img src="https://static.wikia.nocookie.net/marveldatabase/images/8/88/Hulk_Vol_1_1.jpg/revision/latest?cb=20200505012644"  alt="">
-            <div class="card-body">
+            <img src="https://static.wikia.nocookie.net/marveldatabase/images/8/88/Hulk_Vol_1_1.jpg/revision/latest?cb=20200505012644" height=435 alt="">
+            <div class="card-body" style="background-color:rgb(151, 200, 233);">
             <h5 class="card-title"> Hulk Vol 1 </h5>
             <p class="card-text"> $2200.00 </p>
-            <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-primary"> Añadir al carrito </a>
+            <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
             </div>
         </div>
 
         <div class="card" style="width: 18rem;">
-            <img src="https://static.wikia.nocookie.net/spiderman/images/7/75/Amazing_Spider-Man_Vol_1_1.png/revision/latest?cb=20190312224741&path-prefix=es"  alt="">
-            <div class="card-body">
+            <img src="https://static.wikia.nocookie.net/spiderman/images/7/75/Amazing_Spider-Man_Vol_1_1.png/revision/latest?cb=20190312224741&path-prefix=es" height=435 alt="">
+            <div class="card-body" style="background-color:rgb(151, 200, 233);">
             <h5 class="card-title"> Spider-Man Vol 1 </h5>
             <p class="card-text"> $2000.00 </p>
-            <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-primary"> Añadir al carrito </a>
+            <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
             </div>
         </div>
 
         <div class="card" style="width: 18rem;">
-            <img src="https://static.wikia.nocookie.net/marvel/images/9/9f/Captain_America_Comics_Vol_1_1.jpg/revision/latest?cb=20191109194648&path-prefix=es"  alt="">
-            <div class="card-body">
+            <img src="https://static.wikia.nocookie.net/marvel/images/9/9f/Captain_America_Comics_Vol_1_1.jpg/revision/latest?cb=20191109194648&path-prefix=es" height=435 alt="">
+            <div class="card-body" style="background-color:rgb(151, 200, 233);">
             <h5 class="card-title"> Capitan América Vol 1 </h5>
             <p class="card-text"> $2200.00 </p>
-            <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-primary"> Añadir al carrito </a>
+            <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
             </div>
         </div>
 
 </section>
+{% endif %}
 
 {% endblock libro %}
 

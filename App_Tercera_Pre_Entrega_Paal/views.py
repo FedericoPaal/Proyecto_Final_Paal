@@ -239,7 +239,10 @@ def crea_cliente(req):
         mi_formulario = Cliente_Formulario()
         userForm = UserCreationForm()
         return render(req, "clienteFormulario.html", {"mi_formulario": mi_formulario, "userForm": userForm})
+    
 
+def about_me(req):
+    return render(req, "aboutMe.html")
 
 def agregar_al_carrito(req):
 

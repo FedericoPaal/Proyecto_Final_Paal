@@ -1,34 +1,61 @@
  <!-- Navigation-->
-<nav class="navbar navbar-light bg-light static-top">
+
+<nav class="navbar navbar-light" style="background-color:rgb(51, 131, 197);" style="border-bottom:5px solid #000;">
     <div class="container">
-            <a class="navbar-brand" href="{% url 'Inicio' %}"> Inicio </a>
+        
+        <img src="https://cdn4.iconfinder.com/data/icons/comic-colored/512/as_1001-512.png" width="80" height="70" alt="">
+
+        <div class="padding_right_x500" style="color: black;">    
+            <h1> La Antigua Revisteria </h1>
+        </div>
+        
+
+        
+        <form action="{% url 'Buscar' %}" method="get">
+            <div class="padding_left_x35" style="color: black;">
+                <div style="font-size: 20px;">
+                    <input type="text" placeholder="Buscar productos" name="producto">      <button type="submit" style="background-color:rgb(151, 200, 233);"> <img src="https://assets.stickpng.com/images/59cfc4d2d3b1936210a5ddc7.png" height="20" style="background-color:rgb(151, 200, 233);" alt=""> </button>
+                </div>
+            </div>     
+        </form>
+
+    </div>
+    
+</nav>
+
+
+<nav class="navbar navbar-light" style="background-color:rgb(211, 184, 63);">
+    <div class="container">
+            <a class="navbar-brand" href="{% url 'Inicio' %}" style="color: black;"> Inicio </a>
 
             <div class="padding_right_x50">
             </div>
     
-            <a class="navbar-brand" href="{% url 'Novedades' %}"> Novedades </a>
-            <a class="navbar-brand" href="{% url 'Libros' %}"> Libros </a>
-            <a class="navbar-brand" href="{% url 'Merchandising' %}"> Merchandising </a>
-            <a class="navbar-brand" href="{% url 'Consultas' %}"> Consultas </a>
+            <a class="navbar-brand" href="{% url 'Novedades' %}" style="color: black;"> Novedades </a>
+            <a class="navbar-brand" href="{% url 'Libros' %}" style="color: black;"> Libros </a>
+            <a class="navbar-brand" href="{% url 'Merchandising' %}" style="color: black;"> Merchandising </a>
+            <a class="navbar-brand" href="{% url 'Consultas' %}" style="color: black;"> Consultas </a>
 
             <div class="padding_right_x50">
             </div>
 
         {% if user.is_authenticated %}   
             <section>   
-
-            <p class="padding_left_x35"> {{user.username}} </p>
-
+                
+                <div style="font-size: 20px;">
+                    <p class="padding_left_x35" style="color: black;"> {{user.username}} </p>
+                </div>    
+            
             </section>
             
             <div>  
-            <a href="{% url 'Editar_Usuario' %}"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT36xX6fl85ctrEkYHj1r6sMJsFczKC6n41ItPIRw0ZtJRY5yhBjkgJY4HP7LtwXnd5B0M&usqp=CAU" height="35px" alt="avatar"> </a> 
+            <a href="{% url 'Editar_Usuario' %}"> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT36xX6fl85ctrEkYHj1r6sMJsFczKC6n41ItPIRw0ZtJRY5yhBjkgJY4HP7LtwXnd5B0M&usqp=CAU" style="border: 2px solid black;" width="37.5px" height="35px" alt="user"> </a> 
             </div> 
             
-            <a class="btn btn-primary" href="{% url 'Logout' %}"> Cerrar Sesión </a>
-            <a href="{% url 'Carrito_de_Compras' %}"> <img src="https://w7.pngwing.com/pngs/225/984/png-transparent-computer-icons-shopping-cart-encapsulated-postscript-shopping-cart-angle-black-shopping.png" alt="" width="60" height="35"> </a>
+            <a class="btn btn-dark" href="{% url 'Logout' %}"> Cerrar Sesión </a>
+            <a href="{% url 'Carrito_de_Compras' %}"> <img src="https://w7.pngwing.com/pngs/225/984/png-transparent-computer-icons-shopping-cart-encapsulated-postscript-shopping-cart-angle-black-shopping.png" style="border: 2px solid black;" width="60" height="35" alt="cart"> </a>
         {% else %}
-            <a class="btn btn-primary" href="{% url 'Login' %}"> Iniciar Sesión </a>
+            <a class="btn btn-dark" href="{% url 'Login' %}"> Iniciar Sesión </a>
         {% endif %}
     
     </div>
@@ -36,10 +63,10 @@
 
 
 {% if mensaje %}
-    <nav class="navbar navbar-light"  style="background-color: darkseagreen;">
+    <nav class="navbar navbar-light"  style="background-color:darkseagreen;">
         <div class="padding_left_x35">
             <h5> {{mensaje}} </h5>
-    <div>
+        <div>
     </nav>
 {% endif %}
 
@@ -47,7 +74,7 @@
     <nav class="navbar navbar-light"  style="background-color:lightcoral ;">
         <div class="padding_left_x35">
             <h5> {{mensaje2}} </h5>
-    <div>
+        <div>
     </nav>
 {% endif %}  
 

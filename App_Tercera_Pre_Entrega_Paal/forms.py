@@ -67,3 +67,10 @@ class Cliente_Formulario(forms.ModelForm):
     class Meta:
         model=Cliente
         fields = ("nombre", "apellido", "email")
+
+
+class Staff_Formulario(forms.ModelForm):
+    
+    class Meta:
+        model=Staff
+        fields = ("nombre", "apellido", "email")
