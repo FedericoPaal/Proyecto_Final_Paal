@@ -27,7 +27,7 @@ class Consultas_Formulario(forms.Form):
     
     nombre = forms.CharField(max_length=40)
     email = forms.EmailField(max_length=40)
-    consulta = forms.CharField(max_length=1000)
+    consulta = forms.CharField(label="Consulta", widget=forms.Textarea)
 
 class UserEditForm(UserChangeForm):
 

@@ -9,90 +9,68 @@
 
 
 {% if user.cliente %}
+
     <section class="cards_presentacion">
+            {% for merch in merchs %}
 
-    <div class="card" style="width: 18rem;">
-            <img src="https://acdn.mitiendanube.com/stores/002/097/801/products/whatsapp-image-2022-10-15-at-12-09-28-3bf8a7c136db3f6bcd16661260084224-640-0.jpeg" height=300 alt="">
-            <div class="card-body" style="background-color:rgb(151, 200, 233);">
-            <h5 class="card-title"> Llavero Pokemon Pikachu </h5>
-            <p class="card-text"> $1000.00 </p>
-            <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
-            </div>
-    </div>
+                <div class="card" style="width: 18rem;">
+                    <img src="{{merch.imagen.url}}" height=300 alt="">
+                    <div class="card-body" style="background-color:rgb(151, 200, 233);">
+                    <h5 class="card-title"> {{merch.nombre}} </h5>
+                    <p class="card-text"> {{merch.precio}} </p>
+                    <div style="text-align: center">
+                        <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
+                    </div>
+                    </div>
+                </div>
 
-    <div class="card" style="width: 18rem;">
-            <img src="https://www.chileagenda.cl/wp-content/uploads/2021/11/llavero-batman_001.webp" height=300 alt="">
-            <div class="card-body" style="background-color:rgb(151, 200, 233);">
-            <h5 class="card-title"> Llavero Batman Murcielago </h5>
-            <p class="card-text"> $1000.00 </p>
-            <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
-            </div>
-    </div>
+            {% endfor %}
+    </section>
 
-</section>
 {% endif %}
 
+
 {% if not user.cliente and not user.staff %}
+
     <section class="cards_presentacion">
+            {% for merch in merchs %}
 
-    <div class="card" style="width: 18rem;">
-            <img src="https://acdn.mitiendanube.com/stores/002/097/801/products/whatsapp-image-2022-10-15-at-12-09-28-3bf8a7c136db3f6bcd16661260084224-640-0.jpeg" height=300 alt="">
-            <div class="card-body" style="background-color:rgb(151, 200, 233);">
-            <h5 class="card-title"> Llavero Pokemon Pikachu </h5>
-            <p class="card-text"> $1000.00 </p>
-            <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
-            </div>
-    </div>
+                <div class="card" style="width: 18rem;">
+                    <img src="{{merch.imagen.url}}" height=300 alt="">
+                    <div class="card-body" style="background-color:rgb(151, 200, 233);">
+                    <h5 class="card-title"> {{merch.nombre}} </h5>
+                    <p class="card-text"> {{merch.precio}} </p>
+                    <div style="text-align: center">
+                        <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
+                    </div>
+                    </div>
+                </div>
 
-    <div class="card" style="width: 18rem;">
-            <img src="https://www.chileagenda.cl/wp-content/uploads/2021/11/llavero-batman_001.webp" height=300 alt="">
-            <div class="card-body" style="background-color:rgb(151, 200, 233);">
-            <h5 class="card-title"> Llavero Batman Murcielago </h5>
-            <p class="card-text"> $1000.00 </p>
-            <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
-            </div>
-    </div>
+            {% endfor %}
+    </section>
 
-</section>
 {% endif %}
 
 
 {% if user.staff %}
-    <div class="padding_left_x5" style="color: black;">
-    <h1> Formulario de Merchandising </h1>
-</div> 
-<div class="padding_left_x15" style="color: black;">
-    <form action= "{% url 'Merchandising' %}" method="post">{% csrf_token %}
-        <div style="font-size: 20px;">    
-            {{mi_formulario.as_p}}
-            <button type="submit"> Enviar </button>
-        </div>
-    </form>
-</div>
 
-<br>
+    <section class="cards_presentacion">
+        {% for merch in merchs %}
 
-<section class="cards_presentacion">
-
-    <div class="card" style="width: 18rem;">
-            <img src="https://acdn.mitiendanube.com/stores/002/097/801/products/whatsapp-image-2022-10-15-at-12-09-28-3bf8a7c136db3f6bcd16661260084224-640-0.jpeg" height=300 alt="">
-            <div class="card-body" style="background-color:rgb(151, 200, 233);">
-            <h5 class="card-title"> Llavero Pokemon Pikachu </h5>
-            <p class="card-text"> $1000.00 </p>
-            <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
+            <div class="card" style="width: 18rem;">
+                <img src="{{merch.imagen.url}}" height=300 alt="">
+                <div class="card-body" style="background-color:rgb(151, 200, 233);">
+                <h5 class="card-title"> {{merch.nombre}} </h5>
+                <p class="card-text"> {{merch.precio}} </p>
+                <div style="text-align: center">
+                    <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
+                </div>
+                </div>
             </div>
-    </div>
 
-    <div class="card" style="width: 18rem;">
-            <img src="https://www.chileagenda.cl/wp-content/uploads/2021/11/llavero-batman_001.webp" height=300 alt="">
-            <div class="card-body" style="background-color:rgb(151, 200, 233);">
-            <h5 class="card-title"> Llavero Batman Murcielago </h5>
-            <p class="card-text"> $1000.00 </p>
-            <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
-            </div>
-    </div>
+        {% endfor %}
+    </section>
 
-</section>
 {% endif %}
     
 {% endblock merchandising %}

@@ -16,29 +16,34 @@ def inicio(req):
     except:
         return render(req, "inicio.html")
 
-def novedad(req):
+def novedad(req):       #NO SE USA
 
     if req.method == "POST":
         novedad_formulario = Novedades_Formulario(req.POST)
 
         if novedad_formulario.is_valid():
             data = novedad_formulario.cleaned_data
-            _novedad = Novedad(titulo=data["titulo"], autor=data["autor"], precio=data["precio"])
+            _novedad = Novedad(titulo=data["titulo"], autor=data["autor"], precio=data["precio"], imagen=data["imagen"])
             _novedad.save()
 
             return render(req, "inicio.html")
     else:
         novedad_formulario = Novedades_Formulario()
         return render(req, "novedad.html", {"mi_formulario": novedad_formulario})
+    
+def novedades(req):
 
-def libro(req):
+    novedades = Novedad.objects.all()
+    return render(req, "novedad.html", {"novedades": novedades})
+
+def libro(req):     #NO SE USA
 
     if req.method == "POST":
         libro_formulario = Libros_Formulario(req.POST)
 
         if libro_formulario.is_valid():
             data = libro_formulario.cleaned_data
-            _libro = Libro(titulo=data["titulo"], autor=data["autor"], precio=data["precio"])
+            _libro = Libro(titulo=data["titulo"], autor=data["autor"], precio=data["precio"], imagen=data["imagen"])
             _libro.save()
             
             return render(req, "inicio.html")
@@ -47,18 +52,17 @@ def libro(req):
         return render(req, "libro.html", {"mi_formulario": libro_formulario})
     
 def libros(req):
-    lista_libros = Libro.objects.all()
+    libros = Libro.objects.all()
+    return render(req, "libro.html", {"libros": libros})
 
-    return render(req, "listaLibros.html", {"lista_libros": lista_libros})
-
-def merchandising(req):
+def merchandising(req):     #NO SE USA
 
     if req.method == "POST":
         merchandising_formulario = Merchandising_Formulario(req.POST)
 
         if merchandising_formulario.is_valid():
             data = merchandising_formulario.cleaned_data
-            _merchandising = Merchandising(nombre=data["nombre"], precio=data["precio"])
+            _merchandising = Merchandising(nombre=data["nombre"], precio=data["precio"], imagen=data["imagen"])
             _merchandising.save()
             
             return render(req, "inicio.html")
@@ -66,6 +70,12 @@ def merchandising(req):
         merchandising_formulario = Merchandising_Formulario()
         return render(req, "merchandising.html", {"mi_formulario": merchandising_formulario})
     
+def merchs(req):
+
+    merchs = Merchandising.objects.all()
+    return render(req, "merchandising.html", {"merchs": merchs})
+
+
 @login_required
 def consulta(req):
 
@@ -192,10 +202,7 @@ def agregar_avatar(req):
 def carrito_compras(req: HttpRequest):
 
     productos_carrito = Libro.objects.all()
-
-    lista_carrito = productos_carrito
-
-    return render(req, "carrito.html", {"lista_carrito": lista_carrito})
+    return render(req, "carrito.html", {"lista_carrito": productos_carrito})
 
 
 def comprar(req):

@@ -7,6 +7,7 @@ class Novedad(models.Model):
     titulo = models.CharField(max_length=40)
     autor = models.CharField(max_length=40)
     precio = models.CharField(max_length=40)
+    imagen = models.ImageField(null=True, blank=True, upload_to='Novedades')
 
     class Meta():
 
@@ -19,6 +20,7 @@ class Libro(models.Model):
     titulo = models.CharField(max_length=40)
     autor = models.CharField(max_length=40)
     precio = models.CharField(max_length=40)
+    imagen = models.ImageField(null=True, blank=True, upload_to='Libros')
 
     def __str__(self):
         return f"{self.titulo}"
@@ -26,6 +28,7 @@ class Libro(models.Model):
 class Merchandising(models.Model):
     nombre = models.CharField(max_length=40)
     precio = models.CharField(max_length=40)
+    imagen = models.ImageField(null=True, blank=True, upload_to='Merchandising')
 
     class Meta():
         verbose_name_plural = "Merchandising"

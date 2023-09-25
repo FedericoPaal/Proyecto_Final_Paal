@@ -1,5 +1,6 @@
  <!-- Navigation-->
 
+<div style="border-top:5px solid #000;">
 <nav class="navbar navbar-light" style="background-color:rgb(51, 131, 197);" style="border-bottom:5px solid #000;">
     <div class="container">
         
@@ -22,7 +23,7 @@
     </div>
     
 </nav>
-
+</div>
 
 <nav class="navbar navbar-light" style="background-color:rgb(211, 184, 63);">
     <div class="container">
@@ -31,9 +32,9 @@
             <div class="padding_right_x50">
             </div>
     
-            <a class="navbar-brand" href="{% url 'Novedades' %}" style="color: black;"> Novedades </a>
-            <a class="navbar-brand" href="{% url 'Libros' %}" style="color: black;"> Libros </a>
-            <a class="navbar-brand" href="{% url 'Merchandising' %}" style="color: black;"> Merchandising </a>
+            <a class="navbar-brand" href="{% url '_Novedades' %}" style="color: black;"> Novedades </a>
+            <a class="navbar-brand" href="{% url '_Libros' %}" style="color: black;"> Libros </a>
+            <a class="navbar-brand" href="{% url '_Merchs' %}" style="color: black;"> Merchandising </a>
             <a class="navbar-brand" href="{% url 'Consultas' %}" style="color: black;"> Consultas </a>
 
             <div class="padding_right_x50">
@@ -41,11 +42,9 @@
 
         {% if user.is_authenticated %}   
             <section>   
-                
-                <div style="font-size: 20px;">
-                    <p class="padding_left_x35" style="color: black;"> {{user.username}} </p>
-                </div>    
-            
+                    <div class="user-name">
+                        <a> {{user.username}} </a>
+                    </div>    
             </section>
             
             <div>  

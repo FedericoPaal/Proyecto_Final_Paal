@@ -11,6 +11,10 @@
     padding-left: 35px;
 }
 
+.padding_left_x250{
+    padding-left: 250px;
+}
+
 .padding_left_x500{
     padding-left: 500px;
 }
@@ -59,4 +63,11 @@
 .navbar
 {
     border-bottom:5px solid #000;
+}
+
+.user-name{
+    padding-left: 35px;
+    font-size: 18px;
+    text-decoration: none;
+    color: black;
 }

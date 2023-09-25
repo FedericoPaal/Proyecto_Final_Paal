@@ -10,56 +10,68 @@
 
 
 {% if user.cliente %}
-    <section class="cards_presentacion">
-    <div class="card" style="width: 18rem;">
-            <img src="https://static.wikia.nocookie.net/marvel_dc/images/3/3d/Superman_v.1_1.jpg/revision/latest?cb=20211014204109" height=435 alt="">
-            <div class="card-body" style="background-color:rgb(151, 200, 233);">
-            <h5 class="card-title"> Superman Vol 1 </h5>
-            <p class="card-text"> $2200.00 </p>
-            <a href="#" class="btn btn-dark"> Añadir al carrito </a>
-            </div>
-    </div>
-</section>
-{% endif %}
-
-{% if not user.cliente and not user.staff %}
-    <section class="cards_presentacion">
-    <div class="card" style="width: 18rem;">
-            <img src="https://static.wikia.nocookie.net/marvel_dc/images/3/3d/Superman_v.1_1.jpg/revision/latest?cb=20211014204109" height=435 alt="">
-            <div class="card-body" style="background-color:rgb(151, 200, 233);">
-            <h5 class="card-title"> Superman Vol 1 </h5>
-            <p class="card-text"> $2200.00 </p>
-            <a href="#" class="btn btn-dark"> Añadir al carrito </a>
-            </div>
-    </div>
-</section>
-{% endif %}
-
-{% if user.staff %}
-<div class="padding_left_x5" style="color: black;">
-    <h1> Formulario de Novedades </h1>
-</div>    
-<div class="padding_left_x15" style="color: black;">
-    <form action="{% url 'Novedades' %}" method="post">{% csrf_token %}
-        <div style="font-size: 20px;">
-            {{mi_formulario.as_p}}
-            <button type="submit"> Enviar </button>
-        </div>
-    </form>
-</div>
-
-<br>
 
 <section class="cards_presentacion">
-    <div class="card" style="width: 18rem;">
-            <img src="https://static.wikia.nocookie.net/marvel_dc/images/3/3d/Superman_v.1_1.jpg/revision/latest?cb=20211014204109" height=435 alt="">
-            <div class="card-body" style="background-color:rgb(151, 200, 233);">
-            <h5 class="card-title"> Superman Vol 1 </h5>
-            <p class="card-text"> $2200.00 </p>
-            <a href="#" class="btn btn-dark"> Añadir al carrito </a>
+        {% for novedad in novedades %}
+
+            <div class="card" style="width: 18rem;">
+                <img src="{{novedad.imagen.url}}" width=285.5 height=375 alt="imagenes_comics">
+                <div class="card-body" style="background-color:rgb(151, 200, 233);">
+                <h5 class="card-title"> {{novedad.titulo}} </h5>
+                <p class="card-text"> {{novedad.precio}} </p>
+                <div style="text-align: center">
+                    <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
+                </div>
+                </div>
             </div>
-    </div>
-</section>
+
+        {% endfor %}
+    </section>
+
+{% endif %}
+
+
+{% if not user.staff and not user.cliente %}
+
+<section class="cards_presentacion">
+        {% for novedad in novedades %}
+
+            <div class="card" style="width: 18rem;">
+                <img src="{{novedad.imagen.url}}" width=285.5 height=375 alt="imagenes_comics">
+                <div class="card-body" style="background-color:rgb(151, 200, 233);">
+                <h5 class="card-title"> {{novedad.titulo}} </h5>
+                <p class="card-text"> {{novedad.precio}} </p>
+                <div style="text-align: center">
+                    <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
+                </div>
+                </div>
+            </div>
+
+        {% endfor %}
+    </section>
+
+{% endif %}
+
+
+{% if user.staff %}
+
+<section class="cards_presentacion">
+        {% for novedad in novedades %}
+
+            <div class="card" style="width: 18rem;">
+                <img src="{{novedad.imagen.url}}" width=285.5 height=375 alt="imagenes_comics">
+                <div class="card-body" style="background-color:rgb(151, 200, 233);">
+                <h5 class="card-title"> {{novedad.titulo}} </h5>
+                <p class="card-text"> {{novedad.precio}} </p>
+                <div style="text-align: center">
+                    <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
+                </div>
+                </div>
+            </div>
+
+        {% endfor %}
+    </section>
+
 {% endif %}
 
 {% endblock novedad %}

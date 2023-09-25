@@ -5,88 +5,27 @@
 {% endblock header_login %}
 
 {% block novedad %}
+    
+    <section class="cards_presentacion">
+        
+            {% for producto in lista_carrito %}
 
-    <div class="padding_left_x5" style="color: black;">
-        <h2> Aqui tenes tu carrito de compras: </h2>
+                <div class="card" style="width: 18rem;">
+                    <img src="{{producto.imagen.url}}" width=285.5 height=375 alt="imagenes_comics">
+                    <div class="card-body" style="background-color:rgb(151, 200, 233);">
+                    <h5 class="card-title"> {{producto.titulo}} </h5>
+                    <p class="card-text"> {{producto.precio}} </p>
+                    </div> 
+                </div>
+
+            {% endfor %}  
+        
+
+    </section>
+
+    <div style="text-align: center">
+        <a href="{% url 'Comprar' %}" class="btn btn-dark" style="margin: 20px"> Comprar </a>
     </div>
 
-    <br>
-    
-    {% if lista_carrito %}
-    
-        <section class="cards_presentacion">
-            <ul>  
-                {% for producto in lista_carrito %}
-
-                    {% if producto.titulo == 'Batman Vol 1' %}
-                        <li>
-                             <div class="card" style="width: 18rem;">
-                                <img src="https://static.wikia.nocookie.net/batman/images/1/17/Batman_Vol.1_1.jpg/revision/latest?cb=20171106121437&path-prefix=es"  alt="">
-                                <div class="card-body">
-                                <h5 class="card-title"> Batman Vol 1 </h5>
-                                <p class="card-text"> $2000.00 </p>
-                                <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-primary"> Añadir al carrito </a>
-                                </div> 
-                            </div>
-                        </li>
-
-                    {% elif producto.titulo == 'Batman Vol 2' %}
-                        <li>
-                            <div class="card" style="width: 18rem;">
-                                <img src="https://static.wikia.nocookie.net/marvel_dc/images/6/6a/Batman_2.jpg/revision/latest?cb=20141004170008"  alt="" height=440>
-                                <div class="card-body">
-                                <h5 class="card-title"> Batman Vol 2 </h5>
-                                <p class="card-text"> $2000.00 </p>
-                                <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-primary"> Añadir al carrito </a>
-                                </div>
-                            </div> 
-                        </li>
-                    {% elif producto.titulo == 'Hulk Vol 1' %}
-                        <li> 
-                            <div class="card" style="width: 18rem;">
-                                <img src="https://static.wikia.nocookie.net/marveldatabase/images/8/88/Hulk_Vol_1_1.jpg/revision/latest?cb=20200505012644"  alt="">
-                                <div class="card-body">
-                                <h5 class="card-title"> Hulk Vol 1 </h5>
-                                <p class="card-text"> $2200.00 </p>
-                                <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-primary"> Añadir al carrito </a>
-                                </div>
-                            </div>
-                        </li>
-                    {% elif producto.titulo == 'Spider-Man Vol 1' %}
-                        <li>
-                            <div class="card" style="width: 18rem;">
-                                <img src="https://static.wikia.nocookie.net/spiderman/images/7/75/Amazing_Spider-Man_Vol_1_1.png/revision/latest?cb=20190312224741&path-prefix=es"  alt="">
-                                <div class="card-body">
-                                <h5 class="card-title"> Spider-Man Vol 1 </h5>
-                                <p class="card-text"> $2000.00 </p>
-                                <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-primary"> Añadir al carrito </a>
-                                </div>
-                            </div> 
-                        </li>
-                    {% elif producto.titulo == 'Capitán América Vol 1' %}
-                        <li>
-                            <div class="card" style="width: 18rem;">
-                                <img src="https://static.wikia.nocookie.net/marvel/images/9/9f/Captain_America_Comics_Vol_1_1.jpg/revision/latest?cb=20191109194648&path-prefix=es"  alt="">
-                                <div class="card-body">
-                                <h5 class="card-title"> Capitan América Vol 1 </h5>
-                                <p class="card-text"> $2200.00 </p>
-                                <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-primary"> Añadir al carrito </a>
-                                </div>
-                            </div> 
-                        </li>
-                    {% endif %}
-
-                {% endfor %}  
-            </ul>
-
-        </section>
-
-        <div class="padding_left_x500">
-            <a href="{% url 'Comprar' %}" class="btn btn-dark"> Comprar </a>
-        </div>
-
-
-    {% endif %}
-   
 
 {% endblock novedad %}
