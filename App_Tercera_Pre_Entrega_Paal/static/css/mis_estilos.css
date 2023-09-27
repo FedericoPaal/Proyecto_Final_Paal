@@ -11,6 +11,10 @@
     padding-left: 35px;
 }
 
+.padding_left_x75{
+    padding-left: 75px;
+}
+
 .padding_left_x250{
     padding-left: 250px;
 }
@@ -69,5 +73,10 @@
     padding-left: 35px;
     font-size: 18px;
     text-decoration: none;
+    color: black;
+}
+
+.logout-mensaje{
+    text-align: center;
     color: black;
 }

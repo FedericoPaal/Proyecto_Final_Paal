@@ -5,27 +5,95 @@
 {% endblock header_login %}
 
 {% block novedad %}
-    
-    <section class="cards_presentacion">
-        
-            {% for producto in lista_carrito %}
+     
 
-                <div class="card" style="width: 18rem;">
-                    <img src="{{producto.imagen.url}}" width=285.5 height=375 alt="imagenes_comics">
-                    <div class="card-body" style="background-color:rgb(151, 200, 233);">
-                    <h5 class="card-title"> {{producto.titulo}} </h5>
-                    <p class="card-text"> {{producto.precio}} </p>
-                    </div> 
-                </div>
 
-            {% endfor %}  
-        
 
-    </section>
 
-    <div style="text-align: center">
-        <a href="{% url 'Comprar' %}" class="btn btn-dark" style="margin: 20px"> Comprar </a>
+    {% if user.cliente %}
+
+        <!-- Carrito de Compras -->
+    <div class="alert alert-primary" role="alert" style="background-color: rgb(51, 131, 197); border-color: black; border-width: 5px; margin-top: 75px;">
+    <table class="table table-bordered" style="border-color: rgb(51, 131, 197);">
+        <thead>
+            <tr>
+                <th scope="row" colspan="3" class="text-center" style="color: black; font-size: 20px;"> CARRITO </th>
+            </tr>
+            <tr style="color: black; font-size: 18px;">
+                <th scope="col"> Titulo </th>
+                <th scope="col"> Precio </th>
+                <th scope="col"> Cantidad </th>
+            </tr>
+        </thead>
+        <body>
+            
+            {% if req.session.carrito.items %}
+                
+                {% for key, value in req.session.carrito.items %}
+                    <tr>
+                        <td> {{value.titulo}} </td>
+                        <td> {{value.precio}} </td>
+                        <td> {{value.acumulado}}
+                            <a href="{% url 'Agregar_' value.producto_id %}" class="badge btn btn-dark badge-dark"> + </a>
+                            <a href="{% url 'Restar_' value.producto_id %}" class="badge btn btn-dark badge-dark"> - </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            
+            {% else %}
+                <tr>
+                    <td colspan="3">
+                        <div class="alert alert-danger text-center"> Sin productos </div>
+                    </td>
+                </tr>
+
+            {% endif %}
+                <tr style="color: black; font-size: 18px;">
+                    <th scope="row"> Total: </th>
+                    <td colspan="2"> $ {{importe_total}} </td>
+                </tr>
+        </body>
+    </table>
+    <hr>
     </div>
+    <div class="row text-center" style="margin: 15px">
+        <div class="col-6"> <a href="{% url 'Limpiar_' %}" class="btn btn-danger"> Limpiar </a> </div>
+        <div class="col-6"> <a href="#" class="btn btn-success"> Guardar </a> </div>
+    </div> 
+
+
+
+    {% endif %}
+
+        
+    {% if not user.cliente and not user.staff %}
+
+        <div class="container">
+            <div style="text-align: left; padding-left: 450px;">
+                <h5> Total: ${{importe_total}} </h5>
+            </div>
+            <div style="text-align: center">
+                <a href="{% url 'Comprar' %}" class="btn btn-dark" style="margin: 20px"> Comprar </a>
+            </div>
+        </div>
+
+
+    {% endif %}
+
+
+    {% if user.staff %}
+
+        <div class="container">
+            <div style="text-align: left; padding-left: 450px;">
+                <h5> Total: ${{importe_total}} </h5>
+            </div>
+            <div style="text-align: center">
+                <a href="{% url 'Comprar' %}" class="btn btn-dark" style="margin: 20px"> Comprar </a>
+            </div>
+        </div>
+
+
+    {% endif %}
 
 
 {% endblock novedad %}

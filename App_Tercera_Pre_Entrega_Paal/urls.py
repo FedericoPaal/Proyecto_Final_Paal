@@ -23,6 +23,11 @@ urlpatterns = [
     path('_merchs/', merchs, name="_Merchs"),
     path('_novedades/', novedades, name="_Novedades"),
 
-    path('agregar_carrito/', agregar_al_carrito, name="Agregar_Carrito"), #En reparacion
+    #HACER EN OTRA APP?
+    path('agregar/<int:producto_id>/', agregar_producto, name="Agregar_"),
+    path('eliminar/<int:producto_id>/', eliminar_producto, name="Eliminar_"),
+    path('restar/<int:producto_id>/', restar_producto, name="Restar_"),
+    path('limpiar/', limpiar_carrito, name="Limpiar_"),
+
 ]
 

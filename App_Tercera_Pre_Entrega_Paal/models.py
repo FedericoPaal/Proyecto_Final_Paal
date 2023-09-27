@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class Novedad(models.Model):
     titulo = models.CharField(max_length=40)
     autor = models.CharField(max_length=40)
-    precio = models.CharField(max_length=40)
+    precio = models.IntegerField()
     imagen = models.ImageField(null=True, blank=True, upload_to='Novedades')
 
     class Meta():
@@ -19,22 +19,22 @@ class Novedad(models.Model):
 class Libro(models.Model):
     titulo = models.CharField(max_length=40)
     autor = models.CharField(max_length=40)
-    precio = models.CharField(max_length=40)
+    precio = models.IntegerField()
     imagen = models.ImageField(null=True, blank=True, upload_to='Libros')
 
     def __str__(self):
         return f"{self.titulo}"
 
 class Merchandising(models.Model):
-    nombre = models.CharField(max_length=40)
-    precio = models.CharField(max_length=40)
+    titulo = models.CharField(max_length=40)
+    precio = models.IntegerField()
     imagen = models.ImageField(null=True, blank=True, upload_to='Merchandising')
 
     class Meta():
         verbose_name_plural = "Merchandising"
 
     def __str__(self):
-        return f"{self.nombre}"
+        return f"{self.titulo}"
 
 
 class Consulta(models.Model):

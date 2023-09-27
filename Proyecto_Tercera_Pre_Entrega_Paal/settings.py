@@ -64,6 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'App_Tercera_Pre_Entrega_Paal.context_processor.importe_total'
             ],
         },
     },

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django.contrib.auth import authenticate, login, logout
@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from .models import *
 from .forms import *
+from .carrito_compras import Carrito_Compras
 
 # Create your views here.
 def inicio(req):
@@ -33,7 +34,7 @@ def novedad(req):       #NO SE USA
     
 def novedades(req):
 
-    novedades = Novedad.objects.all()
+    novedades = Novedad.objects.all().order_by("id").reverse()
     return render(req, "novedad.html", {"novedades": novedades})
 
 def libro(req):     #NO SE USA
@@ -51,9 +52,6 @@ def libro(req):     #NO SE USA
         libro_formulario = Libros_Formulario()
         return render(req, "libro.html", {"mi_formulario": libro_formulario})
     
-def libros(req):
-    libros = Libro.objects.all()
-    return render(req, "libro.html", {"libros": libros})
 
 def merchandising(req):     #NO SE USA
 
@@ -72,7 +70,7 @@ def merchandising(req):     #NO SE USA
     
 def merchs(req):
 
-    merchs = Merchandising.objects.all()
+    merchs = Merchandising.objects.all().order_by("id").reverse()
     return render(req, "merchandising.html", {"merchs": merchs})
 
 
@@ -180,7 +178,7 @@ def editar_perfil(req):
         return render(req, "editarUsuario.html", {"mi_formulario": mi_formulario})
 
 
-def agregar_avatar(req):
+def agregar_avatar(req):    #NO SE USA
 
     if req.method == 'POST':
 
@@ -197,12 +195,6 @@ def agregar_avatar(req):
     else:
         mi_formulario = Avatar_Formulario()
         return render(req, "agregarAvatar.html", {"mi_formulario": mi_formulario})
-
-
-def carrito_compras(req: HttpRequest):
-
-    productos_carrito = Libro.objects.all()
-    return render(req, "carrito.html", {"lista_carrito": productos_carrito})
 
 
 def comprar(req):
@@ -251,14 +243,47 @@ def crea_cliente(req):
 def about_me(req):
     return render(req, "aboutMe.html")
 
-def agregar_al_carrito(req):
 
-    acumulador_productos = []
+def carrito_compras(req):
 
-    productos_carrito = Libro.objects.all()
+    return render(req, "carrito.html")
 
-    lista_carrito = productos_carrito
 
-    acumulador_productos += lista_carrito
+def libros(req):
 
-    return render(req, "carrito.html", {"acumulador_productos": acumulador_productos})
+    libros = Libro.objects.all().order_by("id").reverse()
+    return render(req, "libro.html", {"libros": libros})
+
+
+def agregar_producto(req, producto_id):
+    
+    carrito = Carrito_Compras(req)
+    libro = Libro.objects.get(id=producto_id)
+    carrito.agregar(libro)
+
+    return render(req, "carrito.html")
+
+
+def eliminar_producto(req, producto_id):
+    
+    carrito = Carrito_Compras(req)
+    libro = Libro.objects.get(id=producto_id)
+    carrito.eliminar(libro)
+
+    return redirect("Carrito_de_Compras")
+
+
+def restar_producto(req, producto_id):
+    
+    carrito = Carrito_Compras(req)
+    libro = Libro.objects.get(id=producto_id)
+    carrito.restar_producto(libro)
+
+    return redirect("Carrito_de_Compras") 
+
+
+def limpiar_carrito(req):
+    
+    carrito = Carrito_Compras(req)
+    carrito.limpiar_carrito()
+    return redirect("Carrito_de_Compras")

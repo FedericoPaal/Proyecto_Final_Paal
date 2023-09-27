@@ -16,10 +16,10 @@
                 <div class="card" style="width: 18rem;">
                     <img src="{{merch.imagen.url}}" height=300 alt="">
                     <div class="card-body" style="background-color:rgb(151, 200, 233);">
-                    <h5 class="card-title"> {{merch.nombre}} </h5>
+                    <h5 class="card-title"> {{merch.titulo}} </h5>
                     <p class="card-text"> {{merch.precio}} </p>
                     <div style="text-align: center">
-                        <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
+                        <a href="{% url 'Agregar_' merch.id %}" class="btn btn-dark"> Agregar al carrito </a>
                     </div>
                     </div>
                 </div>
@@ -38,10 +38,10 @@
                 <div class="card" style="width: 18rem;">
                     <img src="{{merch.imagen.url}}" height=300 alt="">
                     <div class="card-body" style="background-color:rgb(151, 200, 233);">
-                    <h5 class="card-title"> {{merch.nombre}} </h5>
+                    <h5 class="card-title"> {{merch.titulo}} </h5>
                     <p class="card-text"> {{merch.precio}} </p>
                     <div style="text-align: center">
-                        <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
+                        <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Agregar al carrito </a>
                     </div>
                     </div>
                 </div>
@@ -60,10 +60,10 @@
             <div class="card" style="width: 18rem;">
                 <img src="{{merch.imagen.url}}" height=300 alt="">
                 <div class="card-body" style="background-color:rgb(151, 200, 233);">
-                <h5 class="card-title"> {{merch.nombre}} </h5>
+                <h5 class="card-title"> {{merch.titulo}} </h5>
                 <p class="card-text"> {{merch.precio}} </p>
                 <div style="text-align: center">
-                    <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Añadir al carrito </a>
+                    <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Agregar al carrito </a>
                 </div>
                 </div>
             </div>
