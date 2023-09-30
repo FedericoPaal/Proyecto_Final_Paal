@@ -11,11 +11,8 @@ from .carrito_compras import Carrito_Compras
 
 # Create your views here.
 def inicio(req):
-    try:
-        avatar = Avatar.objects.get(user=req.user.id)
-        return render(req, "inicio.html", {"url_avatar": avatar.imagen.url})
-    except:
-        return render(req, "inicio.html")
+    
+    return render(req, "inicio.html")
 
 def novedad(req):       #NO SE USA
 
@@ -99,7 +96,7 @@ def buscar(req: HttpRequest):
     if req.GET["producto"]:
         producto = req.GET["producto"]
         
-        productos = Libro.objects.filter(titulo__icontains=producto)
+        productos = Libro.objects.filter(titulo__icontains=producto)  
 
         return render(req, "inicio.html", {"productos": productos})
     
@@ -246,7 +243,9 @@ def about_me(req):
 
 def carrito_compras(req):
 
-    return render(req, "carrito.html")
+    productos = req.session.get("carrito")
+
+    return render(req, "carrito.html", {"productos": productos})
 
 
 def libros(req):
@@ -260,8 +259,9 @@ def agregar_producto(req, producto_id):
     carrito = Carrito_Compras(req)
     libro = Libro.objects.get(id=producto_id)
     carrito.agregar(libro)
+    productos = req.session.get("carrito")
 
-    return render(req, "carrito.html")
+    return render(req, "carrito.html", {"productos": productos})
 
 
 def eliminar_producto(req, producto_id):
@@ -269,8 +269,9 @@ def eliminar_producto(req, producto_id):
     carrito = Carrito_Compras(req)
     libro = Libro.objects.get(id=producto_id)
     carrito.eliminar(libro)
+    productos = req.session.get("carrito")
 
-    return redirect("Carrito_de_Compras")
+    return render(req, "carrito.html", {"productos": productos})
 
 
 def restar_producto(req, producto_id):
@@ -278,12 +279,14 @@ def restar_producto(req, producto_id):
     carrito = Carrito_Compras(req)
     libro = Libro.objects.get(id=producto_id)
     carrito.restar_producto(libro)
+    productos = req.session.get("carrito")
 
-    return redirect("Carrito_de_Compras") 
+    return render(req, "carrito.html", {"productos": productos})
 
 
 def limpiar_carrito(req):
     
     carrito = Carrito_Compras(req)
     carrito.limpiar_carrito()
-    return redirect("Carrito_de_Compras")
+    productos = req.session.get("carrito")
+    return render(req, "carrito.html", {"productos": productos})

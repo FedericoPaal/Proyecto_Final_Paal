@@ -17,22 +17,24 @@
     <table class="table table-bordered" style="border-color: rgb(51, 131, 197);">
         <thead>
             <tr>
-                <th scope="row" colspan="3" class="text-center" style="color: black; font-size: 20px;"> CARRITO </th>
+                <th scope="row" colspan="4" class="text-center" style="color: black; font-size: 20px;"> CARRITO </th>
             </tr>
             <tr style="color: black; font-size: 18px;">
                 <th scope="col"> Titulo </th>
                 <th scope="col"> Precio </th>
                 <th scope="col"> Cantidad </th>
+                <th scope="col"> Acumulado </th>
             </tr>
         </thead>
-        <body>
+        <tbody>
             
-            {% if req.session.carrito.items %}
+            {% if productos.items %}
                 
-                {% for key, value in req.session.carrito.items %}
+                {% for key, value in productos.items %}
                     <tr>
                         <td> {{value.titulo}} </td>
-                        <td> {{value.precio}} </td>
+                        <td> $ {{value.precio}} </td>
+                        <td> {{value.cantidad}} </td>
                         <td> {{value.acumulado}}
                             <a href="{% url 'Agregar_' value.producto_id %}" class="badge btn btn-dark badge-dark"> + </a>
                             <a href="{% url 'Restar_' value.producto_id %}" class="badge btn btn-dark badge-dark"> - </a>
@@ -42,7 +44,7 @@
             
             {% else %}
                 <tr>
-                    <td colspan="3">
+                    <td colspan="4">
                         <div class="alert alert-danger text-center"> Sin productos </div>
                     </td>
                 </tr>
@@ -50,15 +52,16 @@
             {% endif %}
                 <tr style="color: black; font-size: 18px;">
                     <th scope="row"> Total: </th>
-                    <td colspan="2"> $ {{importe_total}} </td>
+                    <th scope="col">  </th>
+                    <th scope="col">  </th>
+                    <td colspan="4"> $ {{importe_total}} </td>
                 </tr>
-        </body>
+        </tbody>
     </table>
     <hr>
     </div>
     <div class="row text-center" style="margin: 15px">
-        <div class="col-6"> <a href="{% url 'Limpiar_' %}" class="btn btn-danger"> Limpiar </a> </div>
-        <div class="col-6"> <a href="#" class="btn btn-success"> Guardar </a> </div>
+        <div class="col-12"> <a href="{% url 'Limpiar_' %}" class="btn btn-danger"> Limpiar </a> </div>
     </div> 
 
 

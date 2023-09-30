@@ -16,13 +16,14 @@
                 <img src="{{libro.imagen.url}}" width=285.5 height=375 alt="imagenes_comics">
                 <div class="card-body" style="background-color:rgb(151, 200, 233);">
                     <h5 class="card-title"> {{libro.titulo}} </h5>
-                    <p class="card-text"> {{libro.precio}} </p>
+                    <p class="card-text"> $ {{libro.precio}} </p>
                 <div style="text-align: center">
                     <a href="{% url 'Agregar_' libro.id %}" class="btn btn-dark"> Agregar al carrito </a>
                 </div>
                 </div>
             </div>
         {% endfor %}
+    </section>
 
 
 {% endif %}
