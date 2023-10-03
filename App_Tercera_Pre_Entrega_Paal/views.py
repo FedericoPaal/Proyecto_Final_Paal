@@ -9,67 +9,168 @@ from .models import *
 from .forms import *
 from .carrito_compras import Carrito_Compras
 
+
 # Create your views here.
 def inicio(req):
     
     return render(req, "inicio.html")
 
-def novedad(req):       #NO SE USA
+def agregar_Novedad(req):       
 
     if req.method == "POST":
-        novedad_formulario = Novedades_Formulario(req.POST)
+        novedad_formulario = Novedades_Formulario(req.POST, req.FILES)
 
         if novedad_formulario.is_valid():
-            data = novedad_formulario.cleaned_data
-            _novedad = Novedad(titulo=data["titulo"], autor=data["autor"], precio=data["precio"], imagen=data["imagen"])
-            _novedad.save()
+            novedad_formulario.save()
 
-            return render(req, "inicio.html")
+            img = novedad_formulario.instance
+            
+            return render(req, "agregarNovedad.html", {"mi_formulario": novedad_formulario, "img": img})
     else:
         novedad_formulario = Novedades_Formulario()
-        return render(req, "novedad.html", {"mi_formulario": novedad_formulario})
+    return render(req, "agregarNovedad.html", {"mi_formulario": novedad_formulario})
     
-def novedades(req):
+def eliminar_Novedad(req, id):
+    if req.method == "POST":
 
-    novedades = Novedad.objects.all().order_by("id").reverse()
-    return render(req, "novedad.html", {"novedades": novedades})
+        novedad = Novedad.objects.get(id=id)
+        novedad.delete()
 
-def libro(req):     #NO SE USA
+        novedades = Novedad.objects.all().order_by("id").reverse()
+        
+        return render(req, "novedad.html", {"novedades": novedades})
+    
+
+def editar_Novedad(req, id):
+
+    novedad = Novedad.objects.get(id=id) 
 
     if req.method == "POST":
-        libro_formulario = Libros_Formulario(req.POST)
+        mi_formulario = Novedades_Formulario(req.POST, req.FILES, instance=novedad)
+
+        if mi_formulario.is_valid():
+            
+            data = mi_formulario.cleaned_data
+            novedad.titulo = data["titulo"]
+            novedad.autor = data["autor"]
+            novedad.precio = data["precio"]
+            novedad.imagen = data["imagen"]
+            mi_formulario.save()
+            
+            return render(req, "inicio.html")
+    else:
+        mi_formulario = Novedades_Formulario(initial={
+            "titulo": novedad.titulo,
+            "autor": novedad.autor, 
+            "precio": novedad.precio,
+            "imagen": novedad.imagen,
+        })
+        return render(req, "editarNovedad.html", {"mi_formulario": mi_formulario, "id": novedad.id})
+
+
+def agregar_Libro(req):
+
+    if req.method == "POST":
+        libro_formulario = Libros_Formulario(req.POST, req.FILES)
 
         if libro_formulario.is_valid():
-            data = libro_formulario.cleaned_data
-            _libro = Libro(titulo=data["titulo"], autor=data["autor"], precio=data["precio"], imagen=data["imagen"])
-            _libro.save()
+            libro_formulario.save()
+
+            img = libro_formulario.instance
             
-            return render(req, "inicio.html")
+            return render(req, "agregarLibro.html", {"mi_formulario": libro_formulario, "img": img})
     else:
         libro_formulario = Libros_Formulario()
-        return render(req, "libro.html", {"mi_formulario": libro_formulario})
+    return render(req, "agregarLibro.html", {"mi_formulario": libro_formulario})
     
+def eliminar_Libro(req, id):
+    if req.method == "POST":
 
-def merchandising(req):     #NO SE USA
+        libro = Libro.objects.get(id=id)
+        libro.delete()
+
+        libros = Libro.objects.all().order_by("id").reverse()
+        
+        return render(req, "libro.html", {"libros": libros})
+    
+def editar_Libro(req, id):
+
+    libro = Libro.objects.get(id=id) 
 
     if req.method == "POST":
-        merchandising_formulario = Merchandising_Formulario(req.POST)
+        mi_formulario = Libros_Formulario(req.POST, req.FILES, instance=libro)
 
-        if merchandising_formulario.is_valid():
-            data = merchandising_formulario.cleaned_data
-            _merchandising = Merchandising(nombre=data["nombre"], precio=data["precio"], imagen=data["imagen"])
-            _merchandising.save()
+        if mi_formulario.is_valid():
+            
+            data = mi_formulario.cleaned_data
+            libro.titulo = data["titulo"]
+            libro.autor = data["autor"]
+            libro.precio = data["precio"]
+            libro.imagen = data["imagen"]
+            mi_formulario.save()
             
             return render(req, "inicio.html")
     else:
+        mi_formulario = Libros_Formulario(initial={
+            "titulo": libro.titulo,
+            "autor": libro.autor, 
+            "precio": libro.precio,
+            "imagen": libro.imagen,
+        })
+        return render(req, "editarLibro.html", {"mi_formulario": mi_formulario, "id": libro.id})
+
+
+def agregar_Merchandising(req):
+
+    if req.method == "POST":
+        merchandising_formulario = Merchandising_Formulario(req.POST, req.FILES)
+
+        if merchandising_formulario.is_valid():
+            merchandising_formulario.save()
+
+            img = merchandising_formulario.instance
+            
+            return render(req, "agregarMerchandising.html", {"mi_formulario": merchandising_formulario, "img": img})
+    else:
         merchandising_formulario = Merchandising_Formulario()
-        return render(req, "merchandising.html", {"mi_formulario": merchandising_formulario})
+    return render(req, "agregarMerchandising.html", {"mi_formulario": merchandising_formulario})
+   
+
+def eliminar_Merchandising(req, id):
+    if req.method == "POST":
+
+        merchandising = Merchandising.objects.get(id=id)
+        merchandising.delete()
+
+        merchandisings = Merchandising.objects.all().order_by("id").reverse()
+        
+        return render(req, "merchandising.html", {"merchandisings": merchandisings})
     
-def merchs(req):
 
-    merchs = Merchandising.objects.all().order_by("id").reverse()
-    return render(req, "merchandising.html", {"merchs": merchs})
+def editar_Merchandising(req, id):
 
+    merchandising = Merchandising.objects.get(id=id) 
+
+    if req.method == "POST":
+        mi_formulario = Merchandising_Formulario(req.POST, req.FILES, instance=merchandising)
+
+        if mi_formulario.is_valid():
+            
+            data = mi_formulario.cleaned_data
+            merchandising.titulo = data["titulo"]
+            merchandising.precio = data["precio"]
+            merchandising.imagen = data["imagen"]
+            mi_formulario.save()
+            
+            return render(req, "inicio.html")
+    else:
+        mi_formulario = Merchandising_Formulario(initial={
+            "titulo": merchandising.titulo, 
+            "precio": merchandising.precio,
+            "imagen": merchandising.imagen,
+        })
+        return render(req, "editarMerchandising.html", {"mi_formulario": mi_formulario, "id": merchandising.id})
+    
 
 @login_required
 def consulta(req):
@@ -254,6 +355,18 @@ def libros(req):
     return render(req, "libro.html", {"libros": libros})
 
 
+def novedades(req):
+
+    novedades = Novedad.objects.all().order_by("id").reverse()
+    return render(req, "novedad.html", {"novedades": novedades})
+
+
+def merchs(req):
+
+    merchs = Merchandising.objects.all().order_by("id").reverse()
+    return render(req, "merchandising.html", {"merchs": merchs})
+
+#Productos
 def agregar_producto(req, producto_id):
     
     carrito = Carrito_Compras(req)

@@ -23,7 +23,7 @@
                 <th scope="col"> Titulo </th>
                 <th scope="col"> Precio </th>
                 <th scope="col"> Cantidad </th>
-                <th scope="col"> Acumulado </th>
+                <th scope="col"> Subtotal </th>
             </tr>
         </thead>
         <tbody>
@@ -35,7 +35,7 @@
                         <td> {{value.titulo}} </td>
                         <td> $ {{value.precio}} </td>
                         <td> {{value.cantidad}} </td>
-                        <td> {{value.acumulado}}
+                        <td> $ {{value.acumulado}}
                             <a href="{% url 'Agregar_' value.producto_id %}" class="badge btn btn-dark badge-dark"> + </a>
                             <a href="{% url 'Restar_' value.producto_id %}" class="badge btn btn-dark badge-dark"> - </a>
                         </td>
@@ -51,50 +51,26 @@
 
             {% endif %}
                 <tr style="color: black; font-size: 18px;">
-                    <th scope="row"> Total: </th>
                     <th scope="col">  </th>
                     <th scope="col">  </th>
-                    <td colspan="4"> $ {{importe_total}} </td>
+                    <th scope="row" style="text-align: right;"> Total: </th>
+                    
+                    {% if mensaje %}
+                        <td colspan="4"> $ {{0}} </td>
+                    {% else %}
+                        <td colspan="4"> $ {{importe_total}} </td>
+                    {% endif %}
+                        
                 </tr>
         </tbody>
     </table>
     <hr>
     </div>
     <div class="row text-center" style="margin: 15px">
-        <div class="col-12"> <a href="{% url 'Limpiar_' %}" class="btn btn-danger"> Limpiar </a> </div>
+        <div class="col-6"> <a href="{% url 'Limpiar_' %}" class="btn btn-danger"> Limpiar </a> </div>
+        <div class="col-6"> <a href="{% url 'Comprar' %}" class="btn btn-dark"> Comprar </a> </div>
     </div> 
-
-
-
-    {% endif %}
-
         
-    {% if not user.cliente and not user.staff %}
-
-        <div class="container">
-            <div style="text-align: left; padding-left: 450px;">
-                <h5> Total: ${{importe_total}} </h5>
-            </div>
-            <div style="text-align: center">
-                <a href="{% url 'Comprar' %}" class="btn btn-dark" style="margin: 20px"> Comprar </a>
-            </div>
-        </div>
-
-
-    {% endif %}
-
-
-    {% if user.staff %}
-
-        <div class="container">
-            <div style="text-align: left; padding-left: 450px;">
-                <h5> Total: ${{importe_total}} </h5>
-            </div>
-            <div style="text-align: center">
-                <a href="{% url 'Comprar' %}" class="btn btn-dark" style="margin: 20px"> Comprar </a>
-            </div>
-        </div>
-
 
     {% endif %}
 

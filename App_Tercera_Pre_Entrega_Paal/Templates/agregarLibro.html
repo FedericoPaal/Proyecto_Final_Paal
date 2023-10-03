@@ -1,0 +1,25 @@
+{% extends 'padre.html' %}
+
+{% block header_inicio %}
+    <h1 class="mb-5" style="color: rgb(68, 60, 119);"> Agregar Libros </h1>
+{% endblock header_inicio %}
+
+{% block inicio %}
+    
+    {% if user.staff %}
+    <div class="padding_left_x5" style="color: black;">
+        <h1> Agregue libros aqui: </h1>
+    </div>
+    <div class="padding_left_x15" style="color: black;">
+        <form action="{% url 'Agregar_Libros' %} " method="post" enctype="multipart/form-data">{% csrf_token %}
+                    
+            {{mi_formulario.as_p}}
+            
+            <button type="submit"> Enviar </button>
+        </form>   
+        
+    {% endif %}
+         
+    <br>
+
+{% endblock inicio %}

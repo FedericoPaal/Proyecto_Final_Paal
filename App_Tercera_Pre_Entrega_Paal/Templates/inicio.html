@@ -6,8 +6,58 @@
 
 
 {% block inicio %}
+
+
     
-    <div class="padding_left_x5" style="color: black;">
+    {% if user.cliente or not user.cliente and not user.staff %}
+            <div class="padding_left_x5" style="color: black;">
+            <h2> ¿Quiénes somos? </h2>
+        </div>
+
+        <div class="padding_left_x15" style="color: black;">
+            <div style="font-size: 20px;">
+                <p>     
+                Somos una revisteria que ofrece contenido de cómics antiguos de las primeras ediciones y de los más interesantes y entretenidos para todo tipo de público.
+                <br>
+                No se pierda tampoco de nuestros productos! Contamos con merchandising de gran variedad de titulos reconocidos!
+                <br>
+                No se pierda de nada en nuestra revisteria! 
+                </p>
+            </div>
+        </div>
+
+        <br>
+
+        {% if productos %}
+            <div class="padding_left_x5" style="color: black;">
+                <h5> Resultados de la búsqueda: </h5>
+                <ul>  
+                    {% for producto in productos %}
+                        <li> {{producto}} </li>
+                    {% endfor %}  
+                </ul>
+            </div>
+        {% else %} 
+
+            {% if producto not in productos  %}
+            <div class="padding_left_x5" style="color: black;">
+                <h5> Resultados de la búsqueda: </h5>
+            </div>
+            <div class="padding_left_x35" style="color: black;">
+                <h4> No se encontraron resultados de la búsqueda </h4>
+            </div>
+            {% else %}
+                <h5>  </h5>
+            {% endif %}
+
+        {% endif %}
+
+    {% endif %}
+
+
+    
+    {% if user.staff %}
+        <div class="padding_left_x5" style="color: black;">
         <h2> ¿Quiénes somos? </h2>
     </div>
 
@@ -25,29 +75,11 @@
 
     <br>
 
-    {% if productos %}
-        <div class="padding_left_x5" style="color: black;">
-            <h5> Resultados de la búsqueda: </h5>
-            <ul>  
-                {% for producto in productos %}
-                    <li> {{producto}} </li>
-                {% endfor %}  
-            </ul>
-        </div>
-    {% else %} 
-
-        {% if producto not in productos  %}
-        <div class="padding_left_x5" style="color: black;">
-            <h5> Resultados de la búsqueda: </h5>
-        </div>
-        <div class="padding_left_x35" style="color: black;">
-            <h4> No se encontraron resultados de la búsqueda </h4>
-        </div>
-        {% else %}
-            <h5>  </h5>
-        {% endif %}
-
     {% endif %}
+        
+        
+    
+    
 
 {% endblock inicio %}
     

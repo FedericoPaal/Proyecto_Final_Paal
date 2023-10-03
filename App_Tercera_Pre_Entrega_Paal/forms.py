@@ -3,25 +3,24 @@ from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.models import User
 from .models import *
 
-class Novedades_Formulario(forms.Form):
+class Novedades_Formulario(forms.ModelForm):
     
-    titulo = forms.CharField(max_length=40)
-    autor = forms.CharField(max_length=40)
-    precio = forms.CharField(max_length=40)
+    class Meta:
+        model = Novedad
+        fields = '__all__'
 
-
-class Libros_Formulario(forms.Form):
+class Libros_Formulario(forms.ModelForm):
     
-    titulo = forms.CharField(max_length=40)
-    autor = forms.CharField(max_length=40)
-    precio = forms.CharField(max_length=40)
+    class Meta:
+        model = Libro
+        fields = '__all__'  
 
 
-class Merchandising_Formulario(forms.Form):
+class Merchandising_Formulario(forms.ModelForm):
     
-    nombre = forms.CharField(max_length=40)
-    precio = forms.CharField(max_length=40)
-
+    class Meta:
+        model = Merchandising
+        fields = '__all__'  
 
 class Consultas_Formulario(forms.Form):
     

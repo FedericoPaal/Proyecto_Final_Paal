@@ -81,3 +81,13 @@ class Staff(models.Model):
 
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
+    
+class Producto(models.Model):
+    titulo = models.CharField(max_length=40)
+    autor = models.CharField(max_length=40)
+    precio = models.IntegerField()
+    imagen = models.ImageField(null=True, blank=True, upload_to='Productos')
+    categoria = models.CharField(max_length=40)
+
+    def __str__(self):
+        return f"{self.titulo}"

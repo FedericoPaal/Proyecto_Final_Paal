@@ -129,4 +129,4 @@ LOGIN_URL = '/App-Tercera-Pre-Entrega-Paal/login'
 
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

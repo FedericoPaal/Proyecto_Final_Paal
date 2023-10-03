@@ -1,4 +1,4 @@
-from .models import Novedad, Libro, Merchandising
+from .models import Novedad, Libro, Libro
 
 class Carrito_Compras:
     def __init__(self, req):

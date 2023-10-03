@@ -11,21 +11,20 @@
 {% if user.cliente %}
 
     <section class="cards_presentacion">
-            {% for merch in merchs %}
-
-                <div class="card" style="width: 18rem;">
-                    <img src="{{merch.imagen.url}}" height=300 alt="">
-                    <div class="card-body" style="background-color:rgb(151, 200, 233);">
+        {% for merch in merchs %}
+            <div class="card" style="width: 18rem;">
+                <img src="{{merch.imagen.url}}" height=300 alt="imagenes_comics">
+                <div class="card-body" style="background-color:rgb(151, 200, 233);">
                     <h5 class="card-title"> {{merch.titulo}} </h5>
-                    <p class="card-text"> {{merch.precio}} </p>
-                    <div style="text-align: center">
-                        <a href="{% url 'Agregar_' merch.id %}" class="btn btn-dark"> Agregar al carrito </a>
-                    </div>
-                    </div>
+                    <p class="card-text"> $ {{merch.precio}} </p>
+                <div style="text-align: center">
+                    <a href="{% url 'Agregar_' merch.id %}" class="btn btn-dark"> Agregar al carrito </a>
                 </div>
-
-            {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
     </section>
+
 
 {% endif %}
 
@@ -36,12 +35,12 @@
             {% for merch in merchs %}
 
                 <div class="card" style="width: 18rem;">
-                    <img src="{{merch.imagen.url}}" height=300 alt="">
+                    <img src="{{merch.imagen.url}}" height=300 alt="imagenes_comics">
                     <div class="card-body" style="background-color:rgb(151, 200, 233);">
                     <h5 class="card-title"> {{merch.titulo}} </h5>
-                    <p class="card-text"> {{merch.precio}} </p>
+                    <p class="card-text"> $ {{merch.precio}} </p>
                     <div style="text-align: center">
-                        <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Agregar al carrito </a>
+                        <a href="{% url 'Login' %}" class="btn btn-dark"> Agregar al carrito </a>
                     </div>
                     </div>
                 </div>
@@ -54,6 +53,10 @@
 
 {% if user.staff %}
 
+    <div style="text-align: center; margin-top: 15px">
+        <a href="{% url 'Agregar_Merchandisings' %}" class="btn btn-dark"> Agregar Merchandising </a>
+    </div>
+
     <section class="cards_presentacion">
         {% for merch in merchs %}
 
@@ -61,10 +64,13 @@
                 <img src="{{merch.imagen.url}}" height=300 alt="">
                 <div class="card-body" style="background-color:rgb(151, 200, 233);">
                 <h5 class="card-title"> {{merch.titulo}} </h5>
-                <p class="card-text"> {{merch.precio}} </p>
-                <div style="text-align: center">
-                    <a href="{% url 'Carrito_de_Compras' %}" class="btn btn-dark"> Agregar al carrito </a>
+                <p class="card-text"> $ {{merch.precio}} </p>
                 </div>
+                <div style="display: flex; column-gap: 10px; margin: auto;">
+                    <form action="{% url 'Eliminar_Merchandisings' merch.id %}" method="post">{% csrf_token %}
+                        <button class="btn btn-dark"> Eliminar </button>
+                    </form>
+                    <a href="{% url 'Editar_Merchandisings' merch.id %}" class="btn btn-dark" type="button"> Editar </a>
                 </div>
             </div>
 

@@ -4,9 +4,7 @@ from .views import *
 
 urlpatterns = [
     path('', inicio, name="Inicio"),
-    path('novedad/', novedad, name="Novedades"), #NO SE USA
-    path('libro/', libro, name="Libros"), #NO SE USA
-    path('merchandising/', merchandising, name="Merchandising"), #NO SE USA
+
     path('consulta/', consulta, name="Consultas"),
     path('busqueda-objetos/', busqueda_objetos, name="Busqueda_Objetos"),
     path('buscar/', buscar, name="Buscar"),
@@ -19,11 +17,28 @@ urlpatterns = [
     path('comprar/', comprar, name="Comprar"),
     path('register-cliente/', crea_cliente, name="Crea_Cliente"),
     path('about-me/', about_me, name="About_Me"),
+
+    #Agregar Productos
+    path('agregar-novedad/', agregar_Novedad, name="Agregar_Novedades"),
+    path('agregar-libro/', agregar_Libro, name="Agregar_Libros"),
+    path('agregar-merchandising/', agregar_Merchandising, name="Agregar_Merchandisings"),
+
+    #Eliminar Productos
+    path('eliminar-novedad/<int:id>', eliminar_Novedad, name="Eliminar_Novedades"),
+    path('eliminar-libro/<int:id>', eliminar_Libro, name="Eliminar_Libros"),
+    path('eliminar-merchandising/<int:id>', eliminar_Merchandising, name="Eliminar_Merchandisings"),
+
+    #Editar Productos
+    path('editar-novedad/<int:id>', editar_Novedad, name="Editar_Novedades"),
+    path('editar-libro/<int:id>', editar_Libro, name="Editar_Libros"),
+    path('editar-merchandising/<int:id>', editar_Merchandising, name="Editar_Merchandisings"),
+
+    #Listas Productos
     path('_libros/', libros, name="_Libros"),
     path('_merchs/', merchs, name="_Merchs"),
     path('_novedades/', novedades, name="_Novedades"),
 
-    #HACER EN OTRA APP?
+    #Funciones Carrito
     path('agregar/<int:producto_id>/', agregar_producto, name="Agregar_"),
     path('eliminar/<int:producto_id>/', eliminar_producto, name="Eliminar_"),
     path('restar/<int:producto_id>/', restar_producto, name="Restar_"),
