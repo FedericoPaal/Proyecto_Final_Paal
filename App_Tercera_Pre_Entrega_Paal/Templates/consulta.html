@@ -5,22 +5,58 @@
 {% endblock header_consultas %}
 
 {% block consulta %}
-<div class="padding_left_x5" style="color: black;">
-    <h1> Formulario de Consultas </h1>
-</div>
-<div class="padding_left_x15" style="color: black;">
-    <form action="{% url 'Consultas' %}" method="post">{% csrf_token %}
-        <div style="font-size: 20px;">
-            <table style="margin: 10px">
-                {{mi_formulario.as_table}}
-            </table>
-            <div class="padding_left_x250">
-                <button type="submit"> Enviar </button>
-            </div>
-        </div>
-    </form>
-</div>
 
-<br>
+
+    {% if user.cliente %}
+        <div class="padding_left_x5" style="color: black;">
+            <h1> Consulte aqui: </h1>
+        </div>
+        <div class="padding_left_x15" style="color: black;">
+            <form action="{% url 'Consultas' %}" method="post">{% csrf_token %}
+                <div style="font-size: 20px;">
+                    <table style="margin: 10px">
+                        {{mi_formulario.as_table}}
+                    </table>
+                    <div class="padding_left_x250">
+                        <button type="submit"> Enviar </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <br>
+
+        <p class="padding_left_x15" style="color: black; font-size: 23px"> Se le enviará un email a su dirección de correo electrónico respondiendo su consulta! Aguarde hasta que le podamos responder. Muchas gracias! </p>
+    {% endif %}
+
+    
+    {% if user.staff %}
+        <div class="padding_left_x5" style="color: black;">
+            <h1> Responda las consultas de los clientes: </h1>
+        </div>
+        
+        <section class="cards_presentacion">
+            {% for consulta in consultas %}
+                    
+                <div class="card" style="width: 18rem; color: black;">
+                    <div class="card-body" style="background-color:rgb(151, 200, 233);">
+                        <h5 class="card-title"> {{consulta.nombre}} </h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary" style="font-size: 17px"> {{consulta.email}} </h6>
+                        <p class="card-text" style="font-size: 20px"> {{consulta.consulta}} </p>
+                    </div>
+                    <div style="display: flex; column-gap: 10px; margin: auto;">
+                        <form action="{% url 'Eliminar_Consultas' consulta.id %}" method="post">{% csrf_token %}
+                            <button class="btn btn-dark"> Eliminar </button>
+                        </form>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </section>
+
+            
+
+    {% endif %}
+
 
 {% endblock consulta %}

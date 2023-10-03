@@ -13,7 +13,7 @@ class Libros_Formulario(forms.ModelForm):
     
     class Meta:
         model = Libro
-        fields = '__all__'  
+        fields = '__all__'
 
 
 class Merchandising_Formulario(forms.ModelForm):

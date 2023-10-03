@@ -35,7 +35,16 @@
             <a class="navbar-brand" href="{% url '_Novedades' %}" style="color: black;"> Novedades </a>
             <a class="navbar-brand" href="{% url '_Libros' %}" style="color: black;"> Libros </a>
             <a class="navbar-brand" href="{% url '_Merchs' %}" style="color: black;"> Merchandising </a>
-            <a class="navbar-brand" href="{% url 'Consultas' %}" style="color: black;"> Consultas </a>
+
+            
+            {% if user.staff %}
+                <a class="navbar-brand" href="{% url 'Lista_Consultas' %}" style="color: black;"> Consultas </a>
+            {% endif %}
+
+            {% if user.cliente %}
+                <a class="navbar-brand" href="{% url 'Consultas' %}" style="color: black;"> Consultas </a>
+            {% endif %}
+                
 
             <div class="padding_right_x50">
             </div>

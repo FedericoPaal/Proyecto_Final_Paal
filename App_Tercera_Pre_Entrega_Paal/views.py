@@ -9,7 +9,6 @@ from .models import *
 from .forms import *
 from .carrito_compras import Carrito_Compras
 
-
 # Create your views here.
 def inicio(req):
     
@@ -188,6 +187,14 @@ def consulta(req):
         consulta_formulario = Consultas_Formulario()
         return render(req, "consulta.html", {"mi_formulario": consulta_formulario})
     
+def eliminar_Consulta(req, id):
+    if req.method == "POST":
+        consulta = Consulta.objects.get(id=id)
+        consulta.delete()
+
+        consultas = Consulta.objects.all()
+        return render(req, "consulta.html", {"consultas": consultas})
+    
 
 def busqueda_objetos(req):
     return render(req, "inicio.html")
@@ -295,10 +302,6 @@ def agregar_avatar(req):    #NO SE USA
         return render(req, "agregarAvatar.html", {"mi_formulario": mi_formulario})
 
 
-def comprar(req):
-    return render(req, "carrito.html", {"mensaje": "La compra de sus producto/s ha sido exitosa! Gracias por elegirnos!"})
-
-
 def crea_cliente(req):
 
     if req.method == "POST":
@@ -348,6 +351,11 @@ def carrito_compras(req):
 
     return render(req, "carrito.html", {"productos": productos})
 
+def lista_consultas(req):
+
+    consultas = Consulta.objects.all()
+    return render(req, "consulta.html", {"consultas": consultas})
+
 
 def libros(req):
 
@@ -367,6 +375,15 @@ def merchs(req):
     return render(req, "merchandising.html", {"merchs": merchs})
 
 #Productos
+
+def comprar(req):
+
+    carrito = Carrito_Compras(req)
+    carrito.limpiar_carrito()
+    productos = req.session.get("carrito")
+    
+    return render(req, "carrito.html", {"mensaje": "La compra de sus producto/s ha sido exitosa! Gracias por elegirnos!", "productos": productos})
+
 def agregar_producto(req, producto_id):
     
     carrito = Carrito_Compras(req)
@@ -403,3 +420,26 @@ def limpiar_carrito(req):
     carrito.limpiar_carrito()
     productos = req.session.get("carrito")
     return render(req, "carrito.html", {"productos": productos})
+
+
+
+def ver_detalles_libro(req, producto_id):
+
+    libro = Libro.objects.get(id=producto_id)
+    return render(req, "detallesLibro.html", {"libro": libro})
+
+
+def ver_detalles_novedad(req, producto_id):
+
+    novedad = Novedad.objects.get(id=producto_id)
+    return render(req, "detallesNovedad.html", {"novedad": novedad})
+
+
+def ver_detalles_merch(req, producto_id):
+
+    merch = Merchandising.objects.get(id=producto_id)
+    return render(req, "detallesMerchandising.html", {"merch": merch})
+
+
+def sin_pagina(req):
+    return render(req, "sinPagina.html")

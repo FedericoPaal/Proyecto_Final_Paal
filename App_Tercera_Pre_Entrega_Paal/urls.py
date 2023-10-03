@@ -5,7 +5,11 @@ from .views import *
 urlpatterns = [
     path('', inicio, name="Inicio"),
 
+    #Consultas
     path('consulta/', consulta, name="Consultas"),
+    path('_consultas/', lista_consultas, name="Lista_Consultas"),
+    path('eliminar-consulta/<int:id>', eliminar_Consulta, name="Eliminar_Consultas"),
+
     path('busqueda-objetos/', busqueda_objetos, name="Busqueda_Objetos"),
     path('buscar/', buscar, name="Buscar"),
     path('login/', loginView, name="Login"),
@@ -16,7 +20,15 @@ urlpatterns = [
     path('carrito-compras/', carrito_compras, name="Carrito_de_Compras"),
     path('comprar/', comprar, name="Comprar"),
     path('register-cliente/', crea_cliente, name="Crea_Cliente"),
+
+    #Footer 
     path('about-me/', about_me, name="About_Me"),
+    path('sin-pagina/', sin_pagina, name="Sin_Pagina"),
+
+    #Detalles Productos
+    path('detalles-novedad/<int:producto_id>/', ver_detalles_novedad, name="Detalles_Novedad"),
+    path('detalles-libro/<int:producto_id>/', ver_detalles_libro, name="Detalles_Libro"),
+    path('detalles-merchandising/<int:producto_id>/', ver_detalles_merch, name="Detalles_Merchandisings"),
 
     #Agregar Productos
     path('agregar-novedad/', agregar_Novedad, name="Agregar_Novedades"),

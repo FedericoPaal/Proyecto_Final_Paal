@@ -1,13 +1,19 @@
 from django.db import models
 from django.contrib.auth.models import User
+import datetime
 
 # Create your models here.
 
 class Novedad(models.Model):
+    day = datetime.date.today()
+    formatedDay  = day.strftime("%Y/%m/%d")
+
     titulo = models.CharField(max_length=40)
     autor = models.CharField(max_length=40)
     precio = models.IntegerField()
     imagen = models.ImageField(null=True, blank=True, upload_to='Novedades')
+    creacion = models.CharField(max_length=50, default=formatedDay)
+    texto = models.CharField(max_length=500, null=True, blank=True)
 
     class Meta():
 
@@ -17,18 +23,28 @@ class Novedad(models.Model):
         return f"{self.titulo}"
 
 class Libro(models.Model):
+    day = datetime.date.today()
+    formatedDay  = day.strftime("%Y/%m/%d")
+
     titulo = models.CharField(max_length=40)
     autor = models.CharField(max_length=40)
     precio = models.IntegerField()
     imagen = models.ImageField(null=True, blank=True, upload_to='Libros')
+    creacion = models.CharField(max_length=50, default=formatedDay)
+    texto = models.CharField(max_length=500, null=True, blank=True)
 
     def __str__(self):
         return f"{self.titulo}"
 
 class Merchandising(models.Model):
+    day = datetime.date.today()
+    formatedDay  = day.strftime("%Y/%m/%d")
+
     titulo = models.CharField(max_length=40)
     precio = models.IntegerField()
     imagen = models.ImageField(null=True, blank=True, upload_to='Merchandising')
+    creacion = models.CharField(max_length=50, default=formatedDay)
+    texto = models.CharField(max_length=500, null=True, blank=True)
 
     class Meta():
         verbose_name_plural = "Merchandising"
@@ -45,7 +61,7 @@ class Consulta(models.Model):
     def __str__(self):
         return f"{self.consulta}"
 
-class Consultas_Clientes(models.Model):
+class Consultas_Clientes(models.Model):     #NO SE USA
 
     consulta_cliente = models.ForeignKey(Consulta, on_delete=models.CASCADE)
 
@@ -53,7 +69,7 @@ class Consultas_Clientes(models.Model):
         return f"{self.consulta_cliente.nombre}"
     
 
-class Avatar(models.Model):
+class Avatar(models.Model):     #NO SE USA
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     imagen = models.ImageField(upload_to="avatares", blank=True, null=True)
@@ -65,7 +81,7 @@ class Avatar(models.Model):
 class Cliente(models.Model):
     nombre = models.CharField(max_length=40)
     apellido = models.CharField(max_length=40)
-    email = models.EmailField(max_length=40)
+    email = models.EmailField(max_length=40, unique=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     
     def __str__(self):
