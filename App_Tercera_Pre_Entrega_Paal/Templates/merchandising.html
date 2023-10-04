@@ -8,7 +8,7 @@
 {% block merchandising %}
 
 
-{% if user.cliente %}
+{% if user.cliente and not user.cliente or not user.staff %}
 
     <section class="cards_presentacion">
         {% for merch in merchs %}
@@ -30,28 +30,6 @@
 {% endif %}
 
 
-{% if not user.cliente and not user.staff %}
-
-    <section class="cards_presentacion">
-            {% for merch in merchs %}
-
-                <div class="card" style="width: 18rem;">
-                    <img src="{{merch.imagen.url}}" height=300 alt="imagenes_comics">
-                    <div class="card-body" style="background-color:rgb(151, 200, 233);">
-                    <h5 class="card-title"> {{merch.titulo}} </h5>
-                    <p class="card-text"> $ {{merch.precio}} </p>
-                    <div style="text-align: center">
-                        <a href="{% url 'Login' %}" class="btn btn-dark"> Agregar al carrito </a>
-                    </div>
-                    </div>
-                </div>
-
-            {% endfor %}
-    </section>
-
-{% endif %}
-
-
 {% if user.staff %}
 
     <div style="text-align: center; margin-top: 15px">
@@ -66,6 +44,7 @@
                 <div class="card-body" style="background-color:rgb(151, 200, 233);">
                 <h5 class="card-title"> {{merch.titulo}} </h5>
                 <p class="card-text"> $ {{merch.precio}} </p>
+                <p class="card-text"> <a href="{% url 'Detalles_Merchandisings' merch.id %}" style="color: black;"> Ver Detalles </a> </p>
                 </div>
                 <div style="display: flex; column-gap: 10px; margin: auto;">
                     <form action="{% url 'Eliminar_Merchandisings' merch.id %}" method="post">{% csrf_token %}

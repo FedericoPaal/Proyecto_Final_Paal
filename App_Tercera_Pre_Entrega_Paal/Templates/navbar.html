@@ -12,13 +12,18 @@
         
 
         
-        <form action="{% url 'Buscar' %}" method="get">
-            <div class="padding_left_x35" style="color: black;">
-                <div style="font-size: 20px;">
-                    <input type="text" placeholder="Buscar productos" name="producto">      <button type="submit" style="background-color:rgb(151, 200, 233);"> <img src="https://assets.stickpng.com/images/59cfc4d2d3b1936210a5ddc7.png" height="20" style="background-color:rgb(151, 200, 233);" alt=""> </button>
-                </div>
-            </div>     
-        </form>
+        {% if user.cliente and not user.cliente or not user.staff %}
+            
+            <form action="{% url 'Buscar' %}" method="get">
+                <div class="padding_left_x35" style="color: black;">
+                    <div style="font-size: 20px;">
+                        <input type="text" placeholder="Buscar productos" name="producto">
+                        <button type="submit" style="background-color:rgb(151, 200, 233);"> <img src="https://assets.stickpng.com/images/59cfc4d2d3b1936210a5ddc7.png" height="20" style="background-color:rgb(151, 200, 233);" alt=""> </button>
+                    </div>
+                </div>     
+            </form>
+
+        {% endif %}
 
     </div>
     

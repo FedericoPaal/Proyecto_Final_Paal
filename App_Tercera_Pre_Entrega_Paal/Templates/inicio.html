@@ -9,7 +9,7 @@
 
 
     
-    {% if user.cliente or not user.cliente and not user.staff %}
+    {% if user.cliente and not user.cliente or not user.staff %}
             <div class="padding_left_x5" style="color: black;">
             <h2> ¿Quiénes somos? </h2>
         </div>
@@ -30,18 +30,28 @@
 
         {% if productos %}
             <div class="padding_left_x5" style="color: black;">
-                <h5> Resultados de la búsqueda: </h5>
-                <ul>  
-                    {% for producto in productos %}
-                        <li> {{producto}} </li>
-                    {% endfor %}  
-                </ul>
+                <h4> Resultados de la búsqueda: </h4>
+                <section class="cards_presentacion">
+                    {% for libro in productos %}
+                        <div class="card" style="width: 18rem;">
+                            <img src="{{libro.imagen.url}}" width=285.5 height=375 alt="imagenes_comics">
+                            <div class="card-body" style="background-color:rgb(151, 200, 233);">
+                                <h5 class="card-title"> {{libro.titulo}} </h5>
+                                <p class="card-text"> $ {{libro.precio}} </p>
+                                <p class="card-text"> <a href="{% url 'Detalles_Libro' libro.id %}" style="color: black;"> Ver Detalles </a> </p>
+                            <div style="text-align: center">
+                                <a href="{% url 'Agregar_' libro.id %}" class="btn btn-dark"> Agregar al carrito </a>
+                            </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </section>
             </div>
         {% else %} 
 
             {% if producto not in productos  %}
             <div class="padding_left_x5" style="color: black;">
-                <h5> Resultados de la búsqueda: </h5>
+                <h4> Resultados de la búsqueda: </h4>
             </div>
             <div class="padding_left_x35" style="color: black;">
                 <h4> No se encontraron resultados de la búsqueda </h4>
@@ -51,6 +61,8 @@
             {% endif %}
 
         {% endif %}
+
+    <br>
 
     {% endif %}
 
@@ -76,9 +88,6 @@
     <br>
 
     {% endif %}
-        
-        
-    
     
 
 {% endblock inicio %}

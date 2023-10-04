@@ -5,14 +5,12 @@ import datetime
 # Create your models here.
 
 class Novedad(models.Model):
-    day = datetime.date.today()
-    formatedDay  = day.strftime("%Y/%m/%d")
 
     titulo = models.CharField(max_length=40)
     autor = models.CharField(max_length=40)
     precio = models.IntegerField()
     imagen = models.ImageField(null=True, blank=True, upload_to='Novedades')
-    creacion = models.CharField(max_length=50, default=formatedDay)
+    creacion = models.DateField(null=True, blank=True)
     texto = models.CharField(max_length=500, null=True, blank=True)
 
     class Meta():
@@ -23,27 +21,23 @@ class Novedad(models.Model):
         return f"{self.titulo}"
 
 class Libro(models.Model):
-    day = datetime.date.today()
-    formatedDay  = day.strftime("%Y/%m/%d")
 
     titulo = models.CharField(max_length=40)
     autor = models.CharField(max_length=40)
     precio = models.IntegerField()
     imagen = models.ImageField(null=True, blank=True, upload_to='Libros')
-    creacion = models.CharField(max_length=50, default=formatedDay)
+    creacion = models.DateField(null=True, blank=True)
     texto = models.CharField(max_length=500, null=True, blank=True)
 
     def __str__(self):
         return f"{self.titulo}"
 
 class Merchandising(models.Model):
-    day = datetime.date.today()
-    formatedDay  = day.strftime("%Y/%m/%d")
 
     titulo = models.CharField(max_length=40)
     precio = models.IntegerField()
     imagen = models.ImageField(null=True, blank=True, upload_to='Merchandising')
-    creacion = models.CharField(max_length=50, default=formatedDay)
+    creacion = models.DateField(null=True, blank=True)
     texto = models.CharField(max_length=500, null=True, blank=True)
 
     class Meta():

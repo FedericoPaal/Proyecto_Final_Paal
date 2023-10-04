@@ -12,9 +12,11 @@
     </div>
     <div class="padding_left_x15" style="color: black;">
         <form action="{% url 'Agregar_Merchandisings' %} " method="post" enctype="multipart/form-data">{% csrf_token %}
-                    
-            {{mi_formulario.as_p}}
-            
+            <div style="font-size: 20px;">       
+                <table style="margin: 10px">
+                    {{mi_formulario.as_table}}
+                </table>
+            </div>
             <button type="submit"> Enviar </button>
         </form>   
         

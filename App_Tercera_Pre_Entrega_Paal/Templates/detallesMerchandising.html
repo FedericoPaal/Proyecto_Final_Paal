@@ -8,7 +8,7 @@
 {% block inicio %}
     
     
-    {% if user.cliente %}
+    {% if user.cliente and not user.cliente or not user.staff %}
         {% if merch %}
                 <div style="padding-top: 15px;">
                     <div class="card mb-3" style="max-width: 900px; margin: auto; background-color:rgb(151, 200, 233);">
@@ -32,5 +32,29 @@
         {% endif %}
     {% endif %}
         
+
+    {% if user.staff %}
+        {% if merch %}
+                <div style="padding-top: 15px;">
+                    <div class="card mb-3" style="max-width: 900px; margin: auto; background-color:rgb(151, 200, 233);">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                            <img src="{{merch.imagen.url}}" class="img-fluid rounded-start" alt="imagenes_comics">
+                            </div>
+                            <div class="col-md-8">
+                            <div class="card-body" style="font-size: 20px; color: black;">
+                                <p class="card-title"> Titulo: {{merch.titulo}} </p>
+                                <p class="card-text"> Precio: $ {{merch.precio}} </p>
+                                <p class="card-text"> Dia agregado: {{merch.creacion}} </p>
+                                <p class="card-text"> Sobre el producto: </p>
+                                <p class="card-text" style="padding-left: 10px;"> {{merch.texto}} </p>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        {% endif %}
+    {% endif %}
 
 {% endblock inicio %}

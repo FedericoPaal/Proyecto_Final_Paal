@@ -6,9 +6,9 @@
 
 {% block consulta %}
 
-<div class="padding_left_x15">
+<div>
     <form action="{% url 'Editar_Usuario' %}" method="post">{% csrf_token %}
-        <div style="color: black;">
+        <div class="padding_left_x15" style="color: black;">
             <h2> Sus datos: </h2>
                 <div style="font-size: 20px;">
                     {{mi_formulario.as_p}}
@@ -16,8 +16,15 @@
                 </div>
         </div>
     </form>
+    <br>
+
+    <div class="padding_left_x15" style="color: black;">
+        <h4> AVISO </h4>
+        <h5 style="padding-left: 15px"> Al actualizar los datos de su usuario deberá iniciar sesión nuevamente! </h5>
+    <div>
+
+    <br>
 </div>
 
-<br>
 
 {% endblock consulta %}

@@ -1,23 +1,31 @@
+from collections.abc import Mapping
+from typing import Any
 from django import forms
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.models import User
+from django.core.files.base import File
+from django.db.models.base import Model
+from django.forms.utils import ErrorList
 from .models import *
 
 class Novedades_Formulario(forms.ModelForm):
-    
+    texto = forms.CharField(widget=forms.Textarea(attrs={"rows": 7}))
+    creacion = forms.DateField(widget=forms.DateInput(attrs={"class": "form-control", "type": "date"}))
     class Meta:
         model = Novedad
         fields = '__all__'
 
 class Libros_Formulario(forms.ModelForm):
-    
+    texto = forms.CharField(widget=forms.Textarea(attrs={"rows": 7}))
+    creacion = forms.DateField(widget=forms.DateInput(attrs={"class": "form-control", "type": "date"}))
     class Meta:
         model = Libro
-        fields = '__all__'
+        fields = '__all__' 
 
 
 class Merchandising_Formulario(forms.ModelForm):
-    
+    texto = forms.CharField(widget=forms.Textarea(attrs={"rows": 7}))
+    creacion = forms.DateField(widget=forms.DateInput(attrs={"class": "form-control", "type": "date"}))
     class Meta:
         model = Merchandising
         fields = '__all__'  

@@ -7,16 +7,16 @@
 {% block novedad %}
 
     <div class="padding_left_x15" style="color: black;">
-    <form action="{% url 'Editar_Merchandisings' id %}" method="post" enctype="multipart/form-data">{% csrf_token %}
-        <div style="font-size: 20px;">
-            <table style="margin: 10px">
-                {{mi_formulario.as_p}}
-            </table>
-            <div class="padding_left_x250">
-                <button type="submit"> Actualizar </button>
+        <form action="{% url 'Editar_Merchandisings' id %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+            <div style="font-size: 20px;">
+                <table style="margin: 10px">
+                    {{mi_formulario.as_table}}
+                </table>
+                <div class="padding_left_x250">
+                    <button type="submit"> Actualizar </button>
+                </div>
             </div>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
 
 {% endblock novedad %}

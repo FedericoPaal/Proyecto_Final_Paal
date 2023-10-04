@@ -54,6 +54,8 @@ def editar_Novedad(req, id):
             novedad.autor = data["autor"]
             novedad.precio = data["precio"]
             novedad.imagen = data["imagen"]
+            novedad.creacion = data["creacion"]
+            novedad.texto = data["texto"]
             mi_formulario.save()
             
             return render(req, "inicio.html")
@@ -63,6 +65,8 @@ def editar_Novedad(req, id):
             "autor": novedad.autor, 
             "precio": novedad.precio,
             "imagen": novedad.imagen,
+            "creacion": novedad.creacion,
+            "texto": novedad.texto,
         })
         return render(req, "editarNovedad.html", {"mi_formulario": mi_formulario, "id": novedad.id})
 
@@ -106,6 +110,8 @@ def editar_Libro(req, id):
             libro.autor = data["autor"]
             libro.precio = data["precio"]
             libro.imagen = data["imagen"]
+            libro.creacion = data["creacion"]
+            libro.texto = data["texto"]
             mi_formulario.save()
             
             return render(req, "inicio.html")
@@ -115,6 +121,9 @@ def editar_Libro(req, id):
             "autor": libro.autor, 
             "precio": libro.precio,
             "imagen": libro.imagen,
+            "creacion":libro.creacion,
+            "texto": libro.texto,
+            
         })
         return render(req, "editarLibro.html", {"mi_formulario": mi_formulario, "id": libro.id})
 
@@ -159,6 +168,8 @@ def editar_Merchandising(req, id):
             merchandising.titulo = data["titulo"]
             merchandising.precio = data["precio"]
             merchandising.imagen = data["imagen"]
+            merchandising.creacion = data["creacion"]
+            merchandising.texto = data["texto"]
             mi_formulario.save()
             
             return render(req, "inicio.html")
@@ -167,6 +178,8 @@ def editar_Merchandising(req, id):
             "titulo": merchandising.titulo, 
             "precio": merchandising.precio,
             "imagen": merchandising.imagen,
+            "creacion": merchandising.creacion,
+            "texto": merchandising.texto,
         })
         return render(req, "editarMerchandising.html", {"mi_formulario": mi_formulario, "id": merchandising.id})
     
@@ -281,25 +294,6 @@ def editar_perfil(req):
     else:
         mi_formulario = UserEditForm(instance=usuario)
         return render(req, "editarUsuario.html", {"mi_formulario": mi_formulario})
-
-
-def agregar_avatar(req):    #NO SE USA
-
-    if req.method == 'POST':
-
-        mi_formulario = Avatar_Formulario(req.POST, req.FILES)
-
-        if mi_formulario.is_valid():
-
-            data = mi_formulario.cleaned_data
-            avatar = Avatar(user=req.user, imagen=data["imagen"])
-            avatar.save()
-
-            return render(req, "agregarAvatar.html", {"mensaje": "El avatar ha sido actualizado con éxito"})
-    
-    else:
-        mi_formulario = Avatar_Formulario()
-        return render(req, "agregarAvatar.html", {"mi_formulario": mi_formulario})
 
 
 def crea_cliente(req):
