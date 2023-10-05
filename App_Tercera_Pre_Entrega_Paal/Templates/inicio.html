@@ -10,7 +10,7 @@
 
     
     {% if user.cliente and not user.cliente or not user.staff %}
-            <div class="padding_left_x5" style="color: black;">
+        <div class="padding_left_x5" style="color: black;">
             <h2> ¿Quiénes somos? </h2>
         </div>
 
@@ -32,18 +32,20 @@
             <div class="padding_left_x5" style="color: black;">
                 <h4> Resultados de la búsqueda: </h4>
                 <section class="cards_presentacion">
-                    {% for libro in productos %}
+                    {% for producto in productos %}
+
                         <div class="card" style="width: 18rem;">
-                            <img src="{{libro.imagen.url}}" width=285.5 height=375 alt="imagenes_comics">
+                            <img src="{{producto.imagen.url}}" width=285.5 height=375 alt="imagenes_comics">
                             <div class="card-body" style="background-color:rgb(151, 200, 233);">
-                                <h5 class="card-title"> {{libro.titulo}} </h5>
-                                <p class="card-text"> $ {{libro.precio}} </p>
-                                <p class="card-text"> <a href="{% url 'Detalles_Libro' libro.id %}" style="color: black;"> Ver Detalles </a> </p>
+                                <h5 class="card-title"> {{producto.titulo}} </h5>
+                                <p class="card-text"> $ {{producto.precio}} </p>
+                                <p class="card-text"> <a href="{% url 'Detalles_Productos' producto.id %}" style="color: black;"> Ver Detalles </a> </p>
                             <div style="text-align: center">
-                                <a href="{% url 'Agregar_' libro.id %}" class="btn btn-dark"> Agregar al carrito </a>
+                                <a href="{% url 'Agregar_' producto.id %}" class="btn btn-dark"> Agregar al carrito </a>
                             </div>
                             </div>
                         </div>
+
                     {% endfor %}
                 </section>
             </div>
@@ -62,30 +64,68 @@
 
         {% endif %}
 
-    <br>
-
     {% endif %}
 
 
     
     {% if user.staff %}
-        <div class="padding_left_x5" style="color: black;">
-        <h2> ¿Quiénes somos? </h2>
-    </div>
-
-    <div class="padding_left_x15" style="color: black;">
-        <div style="font-size: 20px;">
-            <p>     
-            Somos una revisteria que ofrece contenido de cómics antiguos de las primeras ediciones y de los más interesantes y entretenidos para todo tipo de público.
-            <br>
-            No se pierda tampoco de nuestros productos! Contamos con merchandising de gran variedad de titulos reconocidos!
-            <br>
-            No se pierda de nada en nuestra revisteria! 
-            </p>
+        <div style="text-align: center; margin-top: 15px">
+            <a href="{% url 'Crear_Productos' %}" class="btn btn-dark"> Crear Producto </a>
         </div>
-    </div>
+    
+        <div class="padding_left_x5" style="color: black;">
+            <h2> ¿Quiénes somos? </h2>
+        </div>
 
-    <br>
+        <div class="padding_left_x15" style="color: black;">
+            <div style="font-size: 20px;">
+                <p>     
+                Somos una revisteria que ofrece contenido de cómics antiguos de las primeras ediciones y de los más interesantes y entretenidos para todo tipo de público.
+                <br>
+                No se pierda tampoco de nuestros productos! Contamos con merchandising de gran variedad de titulos reconocidos!
+                <br>
+                No se pierda de nada en nuestra revisteria! 
+                </p>
+            </div>
+        </div>
+
+        <br>
+
+        {% if productos %}
+            <div class="padding_left_x5" style="color: black;">
+                <h4> Resultados de la búsqueda: </h4>
+                <section class="cards_presentacion">
+                    {% for producto in productos %}
+
+                        <div class="card" style="width: 18rem;">
+                            <img src="{{producto.imagen.url}}" width=285.5 height=375 alt="imagenes_comics">
+                            <div class="card-body" style="background-color:rgb(151, 200, 233);">
+                                <h5 class="card-title"> {{producto.titulo}} </h5>
+                                <p class="card-text"> $ {{producto.precio}} </p>
+                                <p class="card-text"> <a href="{% url 'Detalles_Productos' producto.id %}" style="color: black;"> Ver Detalles </a> </p>
+                            <div style="text-align: center">
+                                <a href="{% url 'Agregar_' producto.id %}" class="btn btn-dark"> Agregar al carrito </a>
+                            </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                </section>
+            </div>
+        {% else %} 
+
+            {% if producto not in productos  %}
+            <div class="padding_left_x5" style="color: black;">
+                <h4> Resultados de la búsqueda: </h4>
+            </div>
+            <div class="padding_left_x35" style="color: black;">
+                <h4> No se encontraron resultados de la búsqueda </h4>
+            </div>
+            {% else %}
+                <h5>  </h5>
+            {% endif %}
+
+        {% endif %}
 
     {% endif %}
     

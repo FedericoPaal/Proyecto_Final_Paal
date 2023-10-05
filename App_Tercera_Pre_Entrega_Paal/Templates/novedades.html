@@ -13,6 +13,7 @@
 
     <section class="cards_presentacion">
         {% for novedad in novedades %}
+
             <div class="card" style="width: 18rem;">
                 <img src="{{novedad.imagen.url}}" width=285.5 height=375 alt="imagenes_comics">
                 <div class="card-body" style="background-color:rgb(151, 200, 233);">
@@ -24,6 +25,7 @@
                 </div>
                 </div>
             </div>
+            
         {% endfor %}
     </section>
 
@@ -34,10 +36,6 @@
 
 {% if user.staff %}
 
-    <div style="text-align: center; margin-top: 15px">
-        <a href="{% url 'Agregar_Novedades' %}" class="btn btn-dark"> Agregar Novedad </a>
-    </div>
-
     <section class="cards_presentacion">
         {% for novedad in novedades %}
 
@@ -46,13 +44,13 @@
                 <div class="card-body" style="background-color:rgb(151, 200, 233);">
                 <h5 class="card-title"> {{novedad.titulo}} </h5>
                 <p class="card-text"> $ {{novedad.precio}} </p>
-                <p class="card-text"> <a href="{% url 'Detalles_Novedad' novedad.id %}" style="color: black;"> Ver Detalles </a> </p>
+                <p class="card-text"> <a href="{% url 'Detalles_Productos' novedad.id %}" style="color: black;"> Ver Detalles </a> </p>
                 </div>
                 <div style="display: flex; column-gap: 10px; margin: auto;">
-                    <form action="{% url 'Eliminar_Novedades' novedad.id %}" method="post">{% csrf_token %}
+                    <form action="{% url 'Eliminar_Productos' novedad.id %}" method="post">{% csrf_token %}
                         <button class="btn btn-dark"> Eliminar </button>
                     </form>
-                    <a href="{% url 'Editar_Novedades' novedad.id %}" class="btn btn-dark" type="button"> Editar </a>
+                    <a href="{% url 'Editar_Productos' novedad.id %}" class="btn btn-dark" type="button"> Editar </a>
                 </div>
             </div>
 

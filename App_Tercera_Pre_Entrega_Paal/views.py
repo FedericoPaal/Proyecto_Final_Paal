@@ -18,73 +18,70 @@ def inicio(req):
 def crear_Producto(req):       
 
     if req.method == "POST":
-        novedad_formulario = Novedades_Formulario(req.POST, req.FILES)
+        producto_formulario = Producto_Formulario(req.POST, req.FILES)
 
-        if novedad_formulario.is_valid():
-            novedad_formulario.save()
+        if producto_formulario.is_valid():
+            producto_formulario.save()
 
-            img = novedad_formulario.instance
+            img = producto_formulario.instance
             
-            return render(req, "agregarNovedad.html", {"mi_formulario": novedad_formulario, "img": img})
+            return render(req, "inicio.html", {"mi_formulario": producto_formulario, "img": img})
     else:
-        novedad_formulario = Novedades_Formulario()
-    return render(req, "agregarNovedad.html", {"mi_formulario": novedad_formulario})
+        producto_formulario = Producto_Formulario()
+    return render(req, "crearProducto.html", {"mi_formulario": producto_formulario})
     
+
 def eliminar_Producto(req, id):
     if req.method == "POST":
 
         producto = Producto.objects.get(id=id)
         producto.delete()
+        
         if producto.categoria == "NOVEDADES":
-
             novedades = Producto.objects.all().filter(categoria="NOVEDADES").order_by("id").reverse()
-            
             return render(req, "novedades.html", {"novedades": novedades})
         
         elif producto.categoria == "LIBROS":
-
             libros = Producto.objects.all().filter(categoria="LIBROS").order_by("id").reverse()
-            
             return render(req, "libros.html", {"libros": libros})
         
         elif producto.categoria == "MERCHANDISINGS":
-
             merchandisings = Producto.objects.all().filter(categoria="MERCHANDISINGS").order_by("id").reverse()
-            
-            return render(req, "merchandisings.html", {"merchandisings": merchandisings})
+            return render(req, "inicio.html", {"merchandisings": merchandisings})
     
 
 def editar_Producto(req, id):
 
-    novedad = Producto.objects.get(id=id) 
+    producto = Producto.objects.get(id=id) 
 
     if req.method == "POST":
-        mi_formulario = Novedades_Formulario(req.POST, req.FILES, instance=novedad)
+        mi_formulario = Producto_Formulario(req.POST, req.FILES, instance=producto)
 
         if mi_formulario.is_valid():
             
             data = mi_formulario.cleaned_data
-            novedad.titulo = data["titulo"]
-            novedad.autor = data["autor"]
-            novedad.precio = data["precio"]
-            novedad.imagen = data["imagen"]
-            novedad.creacion = data["creacion"]
-            novedad.texto = data["texto"]
+            producto.titulo = data["titulo"]
+            producto.autor = data["autor"]
+            producto.precio = data["precio"]
+            producto.imagen = data["imagen"]
+            producto.creacion = data["creacion"]
+            producto.categoria = data["categoria"]
+            producto.texto = data["texto"]
             mi_formulario.save()
             
             return render(req, "inicio.html")
     else:
-        mi_formulario = Novedades_Formulario(initial={
-            "titulo": novedad.titulo,
-            "autor": novedad.autor, 
-            "precio": novedad.precio,
-            "imagen": novedad.imagen,
-            "creacion": novedad.creacion,
-            "texto": novedad.texto,
+        mi_formulario = Producto_Formulario(initial={
+            "titulo": producto.titulo,
+            "autor": producto.autor, 
+            "precio": producto.precio,
+            "imagen": producto.imagen,
+            "creacion": producto.creacion,
+            "categoria": producto.categoria,
+            "texto": producto.texto,
         })
-        return render(req, "editarNovedad.html", {"mi_formulario": mi_formulario, "id": novedad.id})
+        return render(req, "editarProducto.html", {"mi_formulario": mi_formulario, "id": producto.id})
 
-    
 
 @login_required
 def consulta(req):
@@ -251,6 +248,7 @@ def carrito_compras(req):
 
     return render(req, "carrito.html", {"productos": productos})
 
+
 def lista_consultas(req):
 
     consultas = Consulta.objects.all()
@@ -293,6 +291,7 @@ def agregar_producto(req, producto_id):
 
     return render(req, "carrito.html", {"productos": productos})
 
+
 def eliminar_producto(req, producto_id):
     
     carrito = Carrito_Compras(req)
@@ -312,13 +311,13 @@ def restar_producto(req, producto_id):
 
     return render(req, "carrito.html", {"productos": productos})
 
+
 def limpiar_carrito(req):
     
     carrito = Carrito_Compras(req)
     carrito.limpiar_carrito()
     productos = req.session.get("carrito")
     return render(req, "carrito.html", {"productos": productos})
-
 
 
 def ver_detalles(req, producto_id):
@@ -332,6 +331,7 @@ def ver_detalles(req, producto_id):
     
     elif producto.categoria == "MERCHANDISINGS":
         return render(req, "detallesMerchandising.html", {"merch": producto})
+
 
 def sin_pagina(req):
     return render(req, "sinPagina.html")

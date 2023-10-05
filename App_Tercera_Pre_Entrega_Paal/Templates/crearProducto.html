@@ -1,0 +1,39 @@
+{% extends 'padre.html' %}
+
+{% block header_inicio %}
+    <h1 class="mb-5" style="color: rgb(68, 60, 119);"> Crear Productos </h1>
+{% endblock header_inicio %}
+
+{% block inicio %}
+    
+    {% if user.staff %}
+    <div class="padding_left_x5" style="color: black;">
+        <h1> Cree productos aqui: </h1>
+    </div>
+    <div class="padding_left_x15" style="color: black;">
+        <form action="{% url 'Crear_Productos' %} " method="post" enctype="multipart/form-data">{% csrf_token %}
+            <div style="font-size: 20px;">        
+                <table style="margin: 10px">
+                    
+                    {{mi_formulario.as_table}}
+                    <div class="padding_left_x15" style="color: black;">
+                        <h4 class="padding_left_x15"> AVISO - En el campo de "Categoria", se deberá escribir en MAYÚSCULAS la categoria referente al producto a crear. Así sean NOVEDADES - LIBROS - MERCHANDISINGS </h4>
+                    <div>
+                
+                </table>
+            </div>
+            <div class="padding_left_x250">
+                <button type="submit"> Enviar </button>
+            </div>
+        </form>   
+
+        <br>
+        
+    
+    </div>
+
+    {% endif %}
+         
+    <br>
+
+{% endblock inicio %}

@@ -1,5 +1,3 @@
-import uuid 
-
 class Carrito_Compras:
     def __init__(self, req):
         self.req = req
@@ -31,11 +29,13 @@ class Carrito_Compras:
                 self.carrito[id_1]["acumulado"] += producto.precio
         self.guardar_carrito()
 
+
     def eliminar(self, producto):
         id_1 = str(producto.id)
         if id_1 in self.carrito:
             del self.carrito[id_1]
             self.guardar_carrito()
+
 
     def restar(self, producto):
         id_1 = str(producto.id)
@@ -46,11 +46,11 @@ class Carrito_Compras:
                 self.eliminar(producto)
             self.guardar_carrito()
 
-        
 
     def guardar_carrito(self):
         self.session["carrito"] = self.carrito
         self.session.modified = True
+
 
     def limpiar_carrito(self):
         self.session["carrito"] = {}

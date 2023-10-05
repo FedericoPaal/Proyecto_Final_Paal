@@ -4,6 +4,19 @@ import datetime
 
 # Create your models here.
 
+class Producto(models.Model):
+    titulo = models.CharField(max_length=40)
+    autor = models.CharField(max_length=40)
+    precio = models.IntegerField()
+    imagen = models.ImageField(null=True, blank=True, upload_to='Productos')
+    creacion = models.DateField(null=True, blank=True)
+    categoria = models.CharField(max_length=40)
+    texto = models.CharField(max_length=500, null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.titulo}"
+    
+
 class Novedad(models.Model):
 
     titulo = models.CharField(max_length=40)
@@ -20,6 +33,7 @@ class Novedad(models.Model):
     def __str__(self):
         return f"{self.titulo}"
 
+
 class Libro(models.Model):
 
     titulo = models.CharField(max_length=40)
@@ -31,6 +45,7 @@ class Libro(models.Model):
 
     def __str__(self):
         return f"{self.titulo}"
+
 
 class Merchandising(models.Model):
 
@@ -54,22 +69,6 @@ class Consulta(models.Model):
 
     def __str__(self):
         return f"{self.consulta}"
-
-class Consultas_Clientes(models.Model):     #NO SE USA
-
-    consulta_cliente = models.ForeignKey(Consulta, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"{self.consulta_cliente.nombre}"
-    
-
-class Avatar(models.Model):     #NO SE USA
-
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    imagen = models.ImageField(upload_to="avatares", blank=True, null=True)
-
-    def __str__(self):
-        return f"{self.imagen}"
     
 
 class Cliente(models.Model):
@@ -82,7 +81,6 @@ class Cliente(models.Model):
         return f"{self.nombre} {self.apellido}"
 
 
-
 class Staff(models.Model):
     nombre = models.CharField(max_length=40)
     apellido = models.CharField(max_length=40)
@@ -91,13 +89,3 @@ class Staff(models.Model):
 
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
-    
-class Producto(models.Model):
-    titulo = models.CharField(max_length=40)
-    autor = models.CharField(max_length=40)
-    precio = models.IntegerField()
-    imagen = models.ImageField(null=True, blank=True, upload_to='Productos')
-    categoria = models.CharField(max_length=40)
-
-    def __str__(self):
-        return f"{self.titulo}"

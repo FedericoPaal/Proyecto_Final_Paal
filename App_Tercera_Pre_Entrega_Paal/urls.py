@@ -5,14 +5,6 @@ from .views import *
 urlpatterns = [
     path('', inicio, name="Inicio"),
 
-    #Consultas
-    path('consulta/', consulta, name="Consultas"),
-    path('_consultas/', lista_consultas, name="Lista_Consultas"),
-    path('eliminar-consulta/<int:id>', eliminar_Consulta, name="Eliminar_Consultas"),
-
-    #Busqueda
-    path('busqueda-objetos/', busqueda_objetos, name="Busqueda_Objetos"),
-    path('buscar/', buscar, name="Buscar"),
 
     #Login & Register
     path('login/', loginView, name="Login"),
@@ -25,37 +17,47 @@ urlpatterns = [
     path('about-me/', about_me, name="About_Me"),
     path('sin-pagina/', sin_pagina, name="Sin_Pagina"),
 
-    #Detalles Productos
-    path('detalles-productos/<int:producto_id>/', ver_detalles, name="Detalles_Productos"),
+
+    #Consultas
+    path('consulta/', consulta, name="Consultas"),
+    path('_consultas/', lista_consultas, name="Lista_Consultas"),
+    path('eliminar-consulta/<int:id>', eliminar_Consulta, name="Eliminar_Consultas"),
+
+    #Busqueda
+    path('busqueda-objetos/', busqueda_objetos, name="Busqueda_Objetos"),
+    path('buscar/', buscar, name="Buscar"),
 
 
-    #Agregar Productos
-    path('crear-producto/', crear_Producto, name="Crear_Productos"),
-
-
-    #Eliminar Productos
-    path('eliminar-producto/<int:id>', eliminar_Producto, name="Eliminar_Productos"),
-    
-
-    #Editar Productos
-    path('editar-producto/<int:id>', editar_Producto, name="Editar_Productos"),
-    
 
     #Listas Productos
     path('_libros/', libros, name="_Libros"),
     path('_merchs/', merchs, name="_Merchs"),
     path('_novedades/', novedades, name="_Novedades"),
 
-    #Funciones Carrito
+    #Detalles Productos
+    path('detalles-producto/<int:producto_id>/', ver_detalles, name="Detalles_Productos"),
+
+    #Crear Productos
+    path('crear-producto/', crear_Producto, name="Crear_Productos"),
+
+    #Eliminar Productos
+    path('eliminar-producto/<int:id>', eliminar_Producto, name="Eliminar_Productos"),
+
+    #Editar Productos
+    path('editar-producto/<int:id>', editar_Producto, name="Editar_Productos"),
+
+
+
+    #Carrito
     path('carrito-compras/', carrito_compras, name="Carrito_de_Compras"),
-    path('comprar/', comprar, name="Comprar"),
-    
-    #Productos
+
+    #Funciones Carrito I    
     path('agregar/<int:producto_id>/', agregar_producto, name="Agregar_"),
     path('eliminar/<int:producto_id>/', eliminar_producto, name="Eliminar_"),
     path('restar/<int:producto_id>/', restar_producto, name="Restar_"),
 
+    #Funciones Carrito II
     path('limpiar/', limpiar_carrito, name="Limpiar_"),
-
+    path('comprar/', comprar, name="Comprar"),
 ]
 

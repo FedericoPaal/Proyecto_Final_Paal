@@ -8,26 +8,11 @@ from django.db.models.base import Model
 from django.forms.utils import ErrorList
 from .models import *
 
-class Novedades_Formulario(forms.ModelForm):
+class Producto_Formulario(forms.ModelForm):
     texto = forms.CharField(widget=forms.Textarea(attrs={"rows": 7}))
     creacion = forms.DateField(widget=forms.DateInput(attrs={"class": "form-control", "type": "date"}))
     class Meta:
-        model = Novedad
-        fields = '__all__'
-
-class Libros_Formulario(forms.ModelForm):
-    texto = forms.CharField(widget=forms.Textarea(attrs={"rows": 7}))
-    creacion = forms.DateField(widget=forms.DateInput(attrs={"class": "form-control", "type": "date"}))
-    class Meta:
-        model = Libro
-        fields = '__all__' 
-
-
-class Merchandising_Formulario(forms.ModelForm):
-    texto = forms.CharField(widget=forms.Textarea(attrs={"rows": 7}))
-    creacion = forms.DateField(widget=forms.DateInput(attrs={"class": "form-control", "type": "date"}))
-    class Meta:
-        model = Merchandising
+        model = Producto
         fields = '__all__'  
 
 class Consultas_Formulario(forms.Form):
@@ -61,13 +46,6 @@ class UserEditForm(UserChangeForm):
             raise forms.ValidationError("Las contraseñas no coinciden")
         return password2
     
-
-class Avatar_Formulario(forms.ModelForm):
-
-    class Meta:
-        model = Avatar
-        fields = ("imagen",)
-
 
 class Cliente_Formulario(forms.ModelForm):
     
