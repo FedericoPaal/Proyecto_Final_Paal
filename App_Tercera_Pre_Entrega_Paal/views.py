@@ -277,7 +277,7 @@ def comprar(req):
     
     return render(req, "carrito.html", {"mensaje": "La compra de sus producto/s ha sido exitosa! Gracias por elegirnos!", "productos": productos})
 
-
+@login_required
 def agregar_producto(req, producto_id):
     
     carrito = Carrito_Compras(req)
