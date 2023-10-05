@@ -1,4 +1,4 @@
-from .models import Novedad, Libro, Libro
+import uuid 
 
 class Carrito_Compras:
     def __init__(self, req):
@@ -11,7 +11,7 @@ class Carrito_Compras:
         else:
             self.carrito = carrito
 
-
+    
     def agregar(self, producto):
 
         id_1 = str(producto.id)
@@ -30,12 +30,6 @@ class Carrito_Compras:
                 self.carrito[id_1]["cantidad"] += 1
                 self.carrito[id_1]["acumulado"] += producto.precio
         self.guardar_carrito()
-        
-
-
-    def guardar_carrito(self):
-        self.session["carrito"] = self.carrito
-        self.session.modified = True
 
     def eliminar(self, producto):
         id_1 = str(producto.id)
@@ -43,7 +37,7 @@ class Carrito_Compras:
             del self.carrito[id_1]
             self.guardar_carrito()
 
-    def restar_producto(self, producto):
+    def restar(self, producto):
         id_1 = str(producto.id)
         if id_1 in self.carrito.keys():
             self.carrito[id_1]["cantidad"] -= 1
@@ -51,6 +45,12 @@ class Carrito_Compras:
             if self.carrito[id_1]["cantidad"] <= 0:
                 self.eliminar(producto)
             self.guardar_carrito()
+
+        
+
+    def guardar_carrito(self):
+        self.session["carrito"] = self.carrito
+        self.session.modified = True
 
     def limpiar_carrito(self):
         self.session["carrito"] = {}

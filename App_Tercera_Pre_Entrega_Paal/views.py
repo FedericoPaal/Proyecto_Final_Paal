@@ -8,13 +8,14 @@ from django.contrib.admin.views.decorators import staff_member_required
 from .models import *
 from .forms import *
 from .carrito_compras import Carrito_Compras
+from itertools import chain
 
 # Create your views here.
 def inicio(req):
     
     return render(req, "inicio.html")
 
-def agregar_Novedad(req):       
+def crear_Producto(req):       
 
     if req.method == "POST":
         novedad_formulario = Novedades_Formulario(req.POST, req.FILES)
@@ -29,20 +30,33 @@ def agregar_Novedad(req):
         novedad_formulario = Novedades_Formulario()
     return render(req, "agregarNovedad.html", {"mi_formulario": novedad_formulario})
     
-def eliminar_Novedad(req, id):
+def eliminar_Producto(req, id):
     if req.method == "POST":
 
-        novedad = Novedad.objects.get(id=id)
-        novedad.delete()
+        producto = Producto.objects.get(id=id)
+        producto.delete()
+        if producto.categoria == "NOVEDADES":
 
-        novedades = Novedad.objects.all().order_by("id").reverse()
+            novedades = Producto.objects.all().filter(categoria="NOVEDADES").order_by("id").reverse()
+            
+            return render(req, "novedades.html", {"novedades": novedades})
         
-        return render(req, "novedad.html", {"novedades": novedades})
+        elif producto.categoria == "LIBROS":
+
+            libros = Producto.objects.all().filter(categoria="LIBROS").order_by("id").reverse()
+            
+            return render(req, "libros.html", {"libros": libros})
+        
+        elif producto.categoria == "MERCHANDISINGS":
+
+            merchandisings = Producto.objects.all().filter(categoria="MERCHANDISINGS").order_by("id").reverse()
+            
+            return render(req, "merchandisings.html", {"merchandisings": merchandisings})
     
 
-def editar_Novedad(req, id):
+def editar_Producto(req, id):
 
-    novedad = Novedad.objects.get(id=id) 
+    novedad = Producto.objects.get(id=id) 
 
     if req.method == "POST":
         mi_formulario = Novedades_Formulario(req.POST, req.FILES, instance=novedad)
@@ -70,118 +84,6 @@ def editar_Novedad(req, id):
         })
         return render(req, "editarNovedad.html", {"mi_formulario": mi_formulario, "id": novedad.id})
 
-
-def agregar_Libro(req):
-
-    if req.method == "POST":
-        libro_formulario = Libros_Formulario(req.POST, req.FILES)
-
-        if libro_formulario.is_valid():
-            libro_formulario.save()
-
-            img = libro_formulario.instance
-            
-            return render(req, "agregarLibro.html", {"mi_formulario": libro_formulario, "img": img})
-    else:
-        libro_formulario = Libros_Formulario()
-    return render(req, "agregarLibro.html", {"mi_formulario": libro_formulario})
-    
-def eliminar_Libro(req, id):
-    if req.method == "POST":
-
-        libro = Libro.objects.get(id=id)
-        libro.delete()
-
-        libros = Libro.objects.all().order_by("id").reverse()
-        
-        return render(req, "libro.html", {"libros": libros})
-    
-def editar_Libro(req, id):
-
-    libro = Libro.objects.get(id=id) 
-
-    if req.method == "POST":
-        mi_formulario = Libros_Formulario(req.POST, req.FILES, instance=libro)
-
-        if mi_formulario.is_valid():
-            
-            data = mi_formulario.cleaned_data
-            libro.titulo = data["titulo"]
-            libro.autor = data["autor"]
-            libro.precio = data["precio"]
-            libro.imagen = data["imagen"]
-            libro.creacion = data["creacion"]
-            libro.texto = data["texto"]
-            mi_formulario.save()
-            
-            return render(req, "inicio.html")
-    else:
-        mi_formulario = Libros_Formulario(initial={
-            "titulo": libro.titulo,
-            "autor": libro.autor, 
-            "precio": libro.precio,
-            "imagen": libro.imagen,
-            "creacion":libro.creacion,
-            "texto": libro.texto,
-            
-        })
-        return render(req, "editarLibro.html", {"mi_formulario": mi_formulario, "id": libro.id})
-
-
-def agregar_Merchandising(req):
-
-    if req.method == "POST":
-        merchandising_formulario = Merchandising_Formulario(req.POST, req.FILES)
-
-        if merchandising_formulario.is_valid():
-            merchandising_formulario.save()
-
-            img = merchandising_formulario.instance
-            
-            return render(req, "agregarMerchandising.html", {"mi_formulario": merchandising_formulario, "img": img})
-    else:
-        merchandising_formulario = Merchandising_Formulario()
-    return render(req, "agregarMerchandising.html", {"mi_formulario": merchandising_formulario})
-   
-
-def eliminar_Merchandising(req, id):
-    if req.method == "POST":
-
-        merchandising = Merchandising.objects.get(id=id)
-        merchandising.delete()
-
-        merchandisings = Merchandising.objects.all().order_by("id").reverse()
-        
-        return render(req, "merchandising.html", {"merchandisings": merchandisings})
-    
-
-def editar_Merchandising(req, id):
-
-    merchandising = Merchandising.objects.get(id=id) 
-
-    if req.method == "POST":
-        mi_formulario = Merchandising_Formulario(req.POST, req.FILES, instance=merchandising)
-
-        if mi_formulario.is_valid():
-            
-            data = mi_formulario.cleaned_data
-            merchandising.titulo = data["titulo"]
-            merchandising.precio = data["precio"]
-            merchandising.imagen = data["imagen"]
-            merchandising.creacion = data["creacion"]
-            merchandising.texto = data["texto"]
-            mi_formulario.save()
-            
-            return render(req, "inicio.html")
-    else:
-        mi_formulario = Merchandising_Formulario(initial={
-            "titulo": merchandising.titulo, 
-            "precio": merchandising.precio,
-            "imagen": merchandising.imagen,
-            "creacion": merchandising.creacion,
-            "texto": merchandising.texto,
-        })
-        return render(req, "editarMerchandising.html", {"mi_formulario": mi_formulario, "id": merchandising.id})
     
 
 @login_required
@@ -217,7 +119,11 @@ def buscar(req: HttpRequest):
     if req.GET["producto"]:
         producto = req.GET["producto"]
         
-        productos = Libro.objects.filter(titulo__icontains=producto)  
+        libro = Libro.objects.filter(titulo__icontains=producto)
+        novedad = Novedad.objects.filter(titulo__icontains=producto)  
+        merch = Merchandising.objects.filter(titulo__icontains=producto)  
+
+        productos = chain(libro, novedad, merch)
 
         return render(req, "inicio.html", {"productos": productos})
     
@@ -353,22 +259,21 @@ def lista_consultas(req):
 
 def libros(req):
 
-    libros = Libro.objects.all().order_by("id").reverse()
-    return render(req, "libro.html", {"libros": libros})
+    libros = Producto.objects.all().filter(categoria="LIBROS").order_by("id").reverse()
+    return render(req, "libros.html", {"libros": libros})
 
 
 def novedades(req):
 
-    novedades = Novedad.objects.all().order_by("id").reverse()
-    return render(req, "novedad.html", {"novedades": novedades})
+    novedades = Producto.objects.all().filter(categoria="NOVEDADES").order_by("id").reverse()
+    return render(req, "novedades.html", {"novedades": novedades})
 
 
 def merchs(req):
 
-    merchs = Merchandising.objects.all().order_by("id").reverse()
-    return render(req, "merchandising.html", {"merchs": merchs})
+    merchs = Producto.objects.all().filter(categoria="MERCHANDISINGS").order_by("id").reverse()
+    return render(req, "merchandisings.html", {"merchs": merchs})
 
-#Productos
 
 def comprar(req):
 
@@ -378,21 +283,21 @@ def comprar(req):
     
     return render(req, "carrito.html", {"mensaje": "La compra de sus producto/s ha sido exitosa! Gracias por elegirnos!", "productos": productos})
 
+
 def agregar_producto(req, producto_id):
     
     carrito = Carrito_Compras(req)
-    libro = Libro.objects.get(id=producto_id)
-    carrito.agregar(libro)
+    producto = Producto.objects.get(id=producto_id)
+    carrito.agregar(producto)
     productos = req.session.get("carrito")
 
     return render(req, "carrito.html", {"productos": productos})
 
-
 def eliminar_producto(req, producto_id):
     
     carrito = Carrito_Compras(req)
-    libro = Libro.objects.get(id=producto_id)
-    carrito.eliminar(libro)
+    producto = Producto.objects.get(id=producto_id)
+    carrito.eliminar(producto)
     productos = req.session.get("carrito")
 
     return render(req, "carrito.html", {"productos": productos})
@@ -400,13 +305,12 @@ def eliminar_producto(req, producto_id):
 
 def restar_producto(req, producto_id):
     
-    carrito = Carrito_Compras(req)
-    libro = Libro.objects.get(id=producto_id)
-    carrito.restar_producto(libro)
+    carrito = Carrito_Compras(req)  
+    producto = Producto.objects.get(id=producto_id)
+    carrito.restar(producto)
     productos = req.session.get("carrito")
 
     return render(req, "carrito.html", {"productos": productos})
-
 
 def limpiar_carrito(req):
     
@@ -417,23 +321,17 @@ def limpiar_carrito(req):
 
 
 
-def ver_detalles_libro(req, producto_id):
+def ver_detalles(req, producto_id):
 
-    libro = Libro.objects.get(id=producto_id)
-    return render(req, "detallesLibro.html", {"libro": libro})
-
-
-def ver_detalles_novedad(req, producto_id):
-
-    novedad = Novedad.objects.get(id=producto_id)
-    return render(req, "detallesNovedad.html", {"novedad": novedad})
-
-
-def ver_detalles_merch(req, producto_id):
-
-    merch = Merchandising.objects.get(id=producto_id)
-    return render(req, "detallesMerchandising.html", {"merch": merch})
-
+    producto = Producto.objects.get(id=producto_id)
+    if producto.categoria == "LIBROS":
+        return render(req, "detallesLibro.html", {"libro": producto})
+    
+    elif producto.categoria == "NOVEDADES":
+        return render(req, "detallesNovedad.html", {"novedad": producto})
+    
+    elif producto.categoria == "MERCHANDISINGS":
+        return render(req, "detallesMerchandising.html", {"merch": producto})
 
 def sin_pagina(req):
     return render(req, "sinPagina.html")

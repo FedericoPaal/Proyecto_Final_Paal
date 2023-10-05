@@ -26,24 +26,20 @@ urlpatterns = [
     path('sin-pagina/', sin_pagina, name="Sin_Pagina"),
 
     #Detalles Productos
-    path('detalles-novedad/<int:producto_id>/', ver_detalles_novedad, name="Detalles_Novedad"),
-    path('detalles-libro/<int:producto_id>/', ver_detalles_libro, name="Detalles_Libro"),
-    path('detalles-merchandising/<int:producto_id>/', ver_detalles_merch, name="Detalles_Merchandisings"),
+    path('detalles-productos/<int:producto_id>/', ver_detalles, name="Detalles_Productos"),
+
 
     #Agregar Productos
-    path('agregar-novedad/', agregar_Novedad, name="Agregar_Novedades"),
-    path('agregar-libro/', agregar_Libro, name="Agregar_Libros"),
-    path('agregar-merchandising/', agregar_Merchandising, name="Agregar_Merchandisings"),
+    path('crear-producto/', crear_Producto, name="Crear_Productos"),
+
 
     #Eliminar Productos
-    path('eliminar-novedad/<int:id>', eliminar_Novedad, name="Eliminar_Novedades"),
-    path('eliminar-libro/<int:id>', eliminar_Libro, name="Eliminar_Libros"),
-    path('eliminar-merchandising/<int:id>', eliminar_Merchandising, name="Eliminar_Merchandisings"),
+    path('eliminar-producto/<int:id>', eliminar_Producto, name="Eliminar_Productos"),
+    
 
     #Editar Productos
-    path('editar-novedad/<int:id>', editar_Novedad, name="Editar_Novedades"),
-    path('editar-libro/<int:id>', editar_Libro, name="Editar_Libros"),
-    path('editar-merchandising/<int:id>', editar_Merchandising, name="Editar_Merchandisings"),
+    path('editar-producto/<int:id>', editar_Producto, name="Editar_Productos"),
+    
 
     #Listas Productos
     path('_libros/', libros, name="_Libros"),
@@ -53,9 +49,12 @@ urlpatterns = [
     #Funciones Carrito
     path('carrito-compras/', carrito_compras, name="Carrito_de_Compras"),
     path('comprar/', comprar, name="Comprar"),
+    
+    #Productos
     path('agregar/<int:producto_id>/', agregar_producto, name="Agregar_"),
     path('eliminar/<int:producto_id>/', eliminar_producto, name="Eliminar_"),
     path('restar/<int:producto_id>/', restar_producto, name="Restar_"),
+
     path('limpiar/', limpiar_carrito, name="Limpiar_"),
 
 ]

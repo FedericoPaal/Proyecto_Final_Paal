@@ -18,7 +18,7 @@
                 <div class="card-body" style="background-color:rgb(151, 200, 233);">
                     <h5 class="card-title"> {{novedad.titulo}} </h5>
                     <p class="card-text"> $ {{novedad.precio}} </p>
-                    <p class="card-text"> <a href="{% url 'Detalles_Novedad' novedad.id %}" style="color: black;"> Ver Detalles </a> </p>
+                    <p class="card-text"> <a href="{% url 'Detalles_Productos' novedad.id %}" style="color: black;"> Ver Detalles </a> </p>
                 <div style="text-align: center">
                     <a href="{% url 'Agregar_' novedad.id %}" class="btn btn-dark"> Agregar al carrito </a>
                 </div>

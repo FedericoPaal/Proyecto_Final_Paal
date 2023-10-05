@@ -17,7 +17,7 @@
                 <div class="card-body" style="background-color:rgb(151, 200, 233);">
                     <h5 class="card-title"> {{libro.titulo}} </h5>
                     <p class="card-text"> $ {{libro.precio}} </p>
-                    <p class="card-text"> <a href="{% url 'Detalles_Libro' libro.id %}" style="color: black;"> Ver Detalles </a> </p>
+                    <p class="card-text"> <a href="{% url 'Detalles_Productos' libro.id %}" style="color: black;"> Ver Detalles </a> </p>
                 <div style="text-align: center">
                     <a href="{% url 'Agregar_' libro.id %}" class="btn btn-dark"> Agregar al carrito </a>
                 </div>
