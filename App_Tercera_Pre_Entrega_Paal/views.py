@@ -25,7 +25,7 @@ def crear_Producto(req):
 
             img = producto_formulario.instance
             
-            return render(req, "inicio.html", {"mi_formulario": producto_formulario, "img": img})
+            return render(req, "inicio.html", {"mi_formulario": producto_formulario, "img": img, "mensaje": "El producto ha sido creado con éxito!"})
     else:
         producto_formulario = Producto_Formulario()
     return render(req, "crearProducto.html", {"mi_formulario": producto_formulario})
@@ -39,15 +39,15 @@ def eliminar_Producto(req, id):
         
         if producto.categoria == "NOVEDADES":
             novedades = Producto.objects.all().filter(categoria="NOVEDADES").order_by("id").reverse()
-            return render(req, "novedades.html", {"novedades": novedades})
+            return render(req, "novedades.html", {"novedades": novedades, "mensaje": "El producto ha sido eliminado con éxito!" })
         
         elif producto.categoria == "LIBROS":
             libros = Producto.objects.all().filter(categoria="LIBROS").order_by("id").reverse()
-            return render(req, "libros.html", {"libros": libros})
+            return render(req, "libros.html", {"libros": libros, "mensaje": "El producto ha sido eliminado con éxito!"})
         
         elif producto.categoria == "MERCHANDISINGS":
             merchandisings = Producto.objects.all().filter(categoria="MERCHANDISINGS").order_by("id").reverse()
-            return render(req, "inicio.html", {"merchandisings": merchandisings})
+            return render(req, "inicio.html", {"merchandisings": merchandisings, "mensaje": "El producto ha sido eliminado con éxito!"})
     
 
 def editar_Producto(req, id):
@@ -69,7 +69,7 @@ def editar_Producto(req, id):
             producto.texto = data["texto"]
             mi_formulario.save()
             
-            return render(req, "inicio.html")
+            return render(req, "inicio.html", {"mensaje": "El producto ha sido editado con éxito!"})
     else:
         mi_formulario = Producto_Formulario(initial={
             "titulo": producto.titulo,
@@ -116,11 +116,7 @@ def buscar(req: HttpRequest):
     if req.GET["producto"]:
         producto = req.GET["producto"]
         
-        libro = Libro.objects.filter(titulo__icontains=producto)
-        novedad = Novedad.objects.filter(titulo__icontains=producto)  
-        merch = Merchandising.objects.filter(titulo__icontains=producto)  
-
-        productos = chain(libro, novedad, merch)
+        productos = Producto.objects.filter(titulo__icontains=producto)
 
         return render(req, "inicio.html", {"productos": productos})
     
