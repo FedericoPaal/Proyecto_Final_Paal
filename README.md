@@ -1,4 +1,4 @@
-                                                        Logueos en la APP
+                                                        Logueos en la APP del proyecto
 
                                                 STAFF                        CLIENTE                     CLIENTE
 1- Para loguearse escriba en el campo de "Username: Romina_staff"  o  "Username: Pepe_cliente    o   "Username: ana_cliente"
@@ -9,7 +9,7 @@
         "Password: 123456"       
 
 
-                                                        Admin de la App
+                                                        Admin de la App del proyecto
     *Entrar y loguearse con el superuser/ staffuser
 
 1- Para entrar, debera escribir lo siguiente luego de la URL:
