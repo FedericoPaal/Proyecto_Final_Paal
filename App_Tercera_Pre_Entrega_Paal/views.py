@@ -275,7 +275,7 @@ def comprar(req):
     carrito.limpiar_carrito()
     productos = req.session.get("carrito")
     
-    return render(req, "carrito.html", {"mensaje": "La compra de sus producto/s ha sido exitosa! Gracias por elegirnos!", "productos": productos})
+    return render(req, "carrito.html", {"mensaje": "La compra de sus producto/s ha sido exitosa! Le enviaremos un mail con el comprobante de compra. Gracias por elegirnos!", "productos": productos})
 
 @login_required
 def agregar_producto(req, producto_id):
