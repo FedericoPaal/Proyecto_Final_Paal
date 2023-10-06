@@ -125,7 +125,7 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = '/App-Tercera-Pre-Entrega-Paal/login'
+LOGIN_URL = '/App_Proyecto_Final_Paal/login'
 
 MEDIA_URL = '/media/'
 

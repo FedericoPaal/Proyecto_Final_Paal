@@ -277,16 +277,18 @@ def comprar(req):
     
     return render(req, "carrito.html", {"mensaje": "La compra de sus producto/s ha sido exitosa! Le enviaremos un mail con el comprobante de compra. Gracias por elegirnos!", "productos": productos})
 
-@login_required
-def agregar_producto(req, producto_id):
-    
-    carrito = Carrito_Compras(req)
-    producto = Producto.objects.get(id=producto_id)
-    carrito.agregar(producto)
-    productos = req.session.get("carrito")
+try:
+    @login_required
+    def agregar_producto(req, producto_id):
+        
+        carrito = Carrito_Compras(req)
+        producto = Producto.objects.get(id=producto_id)
+        carrito.agregar(producto)
+        productos = req.session.get("carrito")
 
-    return render(req, "carrito.html", {"productos": productos})
-
+        return render(req, "carrito.html", {"productos": productos})
+except:
+    pass
 
 def eliminar_producto(req, producto_id):
     
