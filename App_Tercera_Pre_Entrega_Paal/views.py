@@ -237,7 +237,7 @@ def crea_cliente(req):
 def about_me(req):
     return render(req, "aboutMe.html")
 
-
+@login_required
 def carrito_compras(req):
 
     productos = req.session.get("carrito")
